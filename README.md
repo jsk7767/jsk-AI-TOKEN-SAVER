@@ -75,10 +75,10 @@ Copy-Item -Recurse -Force ".agents\skills\jsk-ai-token-saver" "$HOME\.claude\ski
 
 ### Hermes Agent 설치
 
-Hermes는 URL의 `SKILL.md`와 그 문서가 참조한 `scripts/`, `templates/`, `references/` 파일을 함께 설치합니다.
+Hermes에는 GitHub의 `owner/repo/path` 식별자로 설치합니다. 이 방식은 `SKILL.md`뿐 아니라 같은 skill 폴더의 `scripts/`, `templates/`, `references/` 파일까지 함께 설치합니다.
 
 ```bash
-hermes skills install 'https://raw.githubusercontent.com/jsk7767/jsk-AI-TOKEN-SAVER/main/.agents/skills/jsk-ai-token-saver/SKILL.md' --yes
+hermes skills install 'jsk7767/jsk-AI-TOKEN-SAVER/.agents/skills/jsk-ai-token-saver' --yes
 hermes skills list
 hermes -s jsk-ai-token-saver
 ```

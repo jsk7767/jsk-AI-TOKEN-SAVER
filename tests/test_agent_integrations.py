@@ -65,19 +65,19 @@ class AgentIntegrationTests(unittest.TestCase):
 
     def test_readme_documents_all_three_agent_install_paths(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        hermes_url = (
-            "https://raw.githubusercontent.com/jsk7767/jsk-AI-TOKEN-SAVER/"
-            "main/.agents/skills/jsk-ai-token-saver/SKILL.md"
+        hermes_identifier = (
+            "jsk7767/jsk-AI-TOKEN-SAVER/.agents/skills/jsk-ai-token-saver"
         )
 
         for marker in (
             "## Codex · Claude Code · Hermes에서 사용",
             "$HOME/.agents/skills/jsk-ai-token-saver",
             "$HOME/.claude/skills/jsk-ai-token-saver",
-            f"hermes skills install '{hermes_url}'",
+            f"hermes skills install '{hermes_identifier}'",
             "자동으로 실제 API 청구 토큰을 줄이는 프록시가 아닙니다",
         ):
             self.assertIn(marker, readme)
+        self.assertNotIn("raw.githubusercontent.com", readme)
 
         report = json.loads(
             (ROOT / "reports" / "token-ab-baseline.json").read_text(encoding="utf-8")
