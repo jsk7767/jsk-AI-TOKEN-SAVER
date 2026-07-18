@@ -42,10 +42,10 @@
     {
       "id": "qa-verification-handoff",
       "mode": "compact",
-      "baseline": "검증을 위해 단위 테스트와 합성 fixture 재생성을 수행했습니다. 단위 테스트 18개가 모두 통과했고 생성한 JSON 보고서가 저장된 기준선과 일치했습니다. 필수 marker 누락은 없었으며 예상 실패 fixture는 exit code 1로 차단되었습니다. 최종 판정은 PASS입니다.",
-      "candidate": "[검증]\n- unittest 18/18 PASS\n- 보고서 재현 PASS\n- expected-fail exit 1 PASS\n[판정] PASS",
+      "baseline": "검증을 위해 단위 테스트와 합성 fixture 재생성을 수행했습니다. 전체 unittest가 통과했고 생성한 JSON 보고서가 저장된 기준선과 일치했습니다. 필수 marker 누락은 없었으며 예상 실패 fixture는 exit code 1로 차단되었습니다. 최종 판정은 PASS입니다.",
+      "candidate": "[검증]\n- unittest PASS\n- 보고서 재현 PASS\n- expected-fail exit 1 PASS\n[판정] PASS",
       "required_markers": [
-        "18/18",
+        "unittest PASS",
         "보고서 재현",
         "exit 1",
         "PASS"

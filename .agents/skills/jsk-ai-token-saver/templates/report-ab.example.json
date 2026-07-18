@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "name": "agent report A/B example",
+  "benchmark_scope": "synthetic_agent_report_example",
+  "billing_claim": false,
+  "minimum_safe_savings_percent": 20,
+  "cases": [
+    {
+      "id": "compact-handoff",
+      "mode": "compact",
+      "baseline": "The worker inspected src/cache.py and tests/test_cache.py, changed the cache key validation, ran the full unit test command, and confirmed that every test passed. No deployment or external write was performed.",
+      "candidate": "[변경] src/cache.py, tests/test_cache.py\n[검증] unit tests PASS\n[판정] DONE",
+      "required_markers": [
+        "src/cache.py",
+        "tests/test_cache.py",
+        "PASS",
+        "DONE"
+      ]
+    },
+    {
+      "id": "protected-incident",
+      "mode": "clear",
+      "baseline": "상태: health check가 실패했습니다.\n의미: 사용자 접근 장애 가능성이 있습니다.\n조치: 로그 확인만 했고 재시작은 하지 않았습니다.\n검증: endpoint FAIL.\n지금 할 일: 운영자 승인 후 복구합니다.\nPASS/FAIL: FAIL",
+      "candidate": "상태: health check 실패.\n의미: 사용자 접근 장애 가능.\n조치: 로그 확인만 수행, 재시작 안 함.\n검증: endpoint FAIL.\n지금 할 일: 운영자 승인 후 복구.\nPASS/FAIL: FAIL",
+      "required_markers": [
+        "상태:",
+        "의미:",
+        "조치:",
+        "검증:",
+        "지금 할 일:",
+        "PASS/FAIL: FAIL"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "schema_version": 2,
+  "benchmark_scope": "synthetic_visible_trace_example",
+  "runs_required": 3,
+  "minimum_success_rate": 1.0,
+  "tasks": [
+    {
+      "id": "compact-verified-handoff",
+      "context_limit_tokens": 1000,
+      "required_markers": [
+        "artifact.json",
+        "PASS"
+      ],
+      "arms": {
+        "baseline": [
+          {
+            "success": true,
+            "peak_context_tokens": 220,
+            "messages": [
+              {"role": "system", "text": "Inspect the generated artifact and provide all verification details."},
+              {"role": "user", "text": "Please verify artifact.json and explain every intermediate step in detail."},
+              {"role": "tool", "text": "Opened artifact.json. Schema valid. Required fields present. Re-read file to verify the same values."},
+              {"role": "assistant", "text": "I inspected artifact.json, checked the schema and all required fields, and verified the values again. The final result is PASS."}
+            ]
+          },
+          {
+            "success": true,
+            "peak_context_tokens": 220,
+            "messages": [
+              {"role": "system", "text": "Inspect the generated artifact and provide all verification details."},
+              {"role": "user", "text": "Please verify artifact.json and explain every intermediate step in detail."},
+              {"role": "tool", "text": "Opened artifact.json. Schema valid. Required fields present. Re-read file to verify the same values."},
+              {"role": "assistant", "text": "I inspected artifact.json, checked the schema and all required fields, and verified the values again. The final result is PASS."}
+            ]
+          },
+          {
+            "success": true,
+            "peak_context_tokens": 220,
+            "messages": [
+              {"role": "system", "text": "Inspect the generated artifact and provide all verification details."},
+              {"role": "user", "text": "Please verify artifact.json and explain every intermediate step in detail."},
+              {"role": "tool", "text": "Opened artifact.json. Schema valid. Required fields present. Re-read file to verify the same values."},
+              {"role": "assistant", "text": "I inspected artifact.json, checked the schema and all required fields, and verified the values again. The final result is PASS."}
+            ]
+          }
+        ],
+        "candidate": [
+          {
+            "success": true,
+            "peak_context_tokens": 90,
+            "messages": [
+              {"role": "user", "text": "Verify artifact.json."},
+              {"role": "tool", "text": "artifact.json: schema valid; required fields present."},
+              {"role": "assistant", "text": "artifact.json verified — PASS"}
+            ]
+          },
+          {
+            "success": true,
+            "peak_context_tokens": 90,
+            "messages": [
+              {"role": "user", "text": "Verify artifact.json."},
+              {"role": "tool", "text": "artifact.json: schema valid; required fields present."},
+              {"role": "assistant", "text": "artifact.json verified — PASS"}
+            ]
+          },
+          {
+            "success": true,
+            "peak_context_tokens": 90,
+            "messages": [
+              {"role": "user", "text": "Verify artifact.json."},
+              {"role": "tool", "text": "artifact.json: schema valid; required fields present."},
+              {"role": "assistant", "text": "artifact.json verified — PASS"}
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
