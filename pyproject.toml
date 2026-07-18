@@ -1,0 +1,12 @@
+[project]
+name = "jsk-ai-token-saver"
+version = "0.1.0"
+description = "Safety-first visible-token benchmark toolkit for AI agent workflows"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "tiktoken>=0.13.0,<1",
+]
+
+[tool.uv]
+package = false

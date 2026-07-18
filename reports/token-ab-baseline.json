@@ -1,0 +1,94 @@
+{
+  "schema_version": 1,
+  "benchmark_scope": "synthetic_generic_agent_report_fixtures",
+  "billing_claim": false,
+  "minimum_safe_savings_percent": 35.0,
+  "safe_case_count": 4,
+  "safe_baseline_tokens": 291,
+  "safe_candidate_tokens": 122,
+  "safe_savings_percent": 58.08,
+  "threshold_pass": true,
+  "all_cases_pass": true,
+  "suite_failure_reasons": [],
+  "pass": true,
+  "cases": [
+    {
+      "id": "investigator-code-location",
+      "mode": "minimal",
+      "baseline_tokens": 70,
+      "candidate_tokens": 29,
+      "savings_percent": 58.57,
+      "baseline_exit": null,
+      "candidate_exit": null,
+      "missing_markers": [],
+      "failure_reasons": [],
+      "pass": true
+    },
+    {
+      "id": "worker-change-handoff",
+      "mode": "compact",
+      "baseline_tokens": 72,
+      "candidate_tokens": 27,
+      "savings_percent": 62.5,
+      "baseline_exit": null,
+      "candidate_exit": null,
+      "missing_markers": [],
+      "failure_reasons": [],
+      "pass": true
+    },
+    {
+      "id": "reviewer-finding",
+      "mode": "minimal",
+      "baseline_tokens": 76,
+      "candidate_tokens": 33,
+      "savings_percent": 56.58,
+      "baseline_exit": null,
+      "candidate_exit": null,
+      "missing_markers": [],
+      "failure_reasons": [],
+      "pass": true
+    },
+    {
+      "id": "qa-verification-handoff",
+      "mode": "compact",
+      "baseline_tokens": 73,
+      "candidate_tokens": 33,
+      "savings_percent": 54.79,
+      "baseline_exit": null,
+      "candidate_exit": null,
+      "missing_markers": [],
+      "failure_reasons": [],
+      "pass": true
+    },
+    {
+      "id": "server-incident-protected",
+      "mode": "clear",
+      "baseline_tokens": 83,
+      "candidate_tokens": 59,
+      "savings_percent": 28.92,
+      "baseline_exit": null,
+      "candidate_exit": null,
+      "missing_markers": [],
+      "failure_reasons": [],
+      "pass": true
+    },
+    {
+      "id": "security-alert-protected",
+      "mode": "clear",
+      "baseline_tokens": 90,
+      "candidate_tokens": 74,
+      "savings_percent": 17.78,
+      "baseline_exit": null,
+      "candidate_exit": null,
+      "missing_markers": [],
+      "failure_reasons": [],
+      "pass": true
+    }
+  ],
+  "tokenizer": {
+    "library": "tiktoken",
+    "version": "0.13.0",
+    "encoding": "o200k_base",
+    "exact_for_fixture_text": true
+  }
+}

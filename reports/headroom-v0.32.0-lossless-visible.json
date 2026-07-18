@@ -1,0 +1,473 @@
+{
+  "schema_version": 2,
+  "benchmark_scope": "headroom_v0.32.0_lossless_only_visible_payload",
+  "metric": "visible_tokens_per_correct_task",
+  "billing_claim": false,
+  "hidden_reasoning_measured": false,
+  "runs_required": 3,
+  "minimum_success_rate": 1.0,
+  "suite_failure_reasons": [],
+  "tasks": [
+    {
+      "id": "uniform-200-log-records",
+      "context_limit_tokens": 128000,
+      "required_markers": [
+        "CRITICAL-017",
+        "SECURITY-099",
+        "FATAL-177",
+        "PASS",
+        "CCR marker count 0"
+      ],
+      "arms": {
+        "baseline": {
+          "n_runs": 3,
+          "n_success": 3,
+          "success_rate": 1.0,
+          "visible_tokens": {
+            "samples": [
+              9245,
+              9245,
+              9245
+            ],
+            "median": 9245,
+            "p90": 9245,
+            "mean": 9245.0
+          },
+          "tool_output_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "repeat_read_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "retry_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "headroom_tokens": {
+            "samples": [
+              118755,
+              118755,
+              118755
+            ],
+            "median": 118755,
+            "p90": 118755,
+            "mean": 118755.0
+          },
+          "runs": [
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 9245,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 18,
+                "user": 9215,
+                "assistant": 12
+              },
+              "peak_context_tokens": 9245,
+              "headroom_tokens": 118755
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 9245,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 18,
+                "user": 9215,
+                "assistant": 12
+              },
+              "peak_context_tokens": 9245,
+              "headroom_tokens": 118755
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 9245,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 18,
+                "user": 9215,
+                "assistant": 12
+              },
+              "peak_context_tokens": 9245,
+              "headroom_tokens": 118755
+            }
+          ]
+        },
+        "candidate": {
+          "n_runs": 3,
+          "n_success": 3,
+          "success_rate": 1.0,
+          "visible_tokens": {
+            "samples": [
+              6265,
+              6265,
+              6265
+            ],
+            "median": 6265,
+            "p90": 6265,
+            "mean": 6265.0
+          },
+          "tool_output_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "repeat_read_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "retry_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "headroom_tokens": {
+            "samples": [
+              121735,
+              121735,
+              121735
+            ],
+            "median": 121735,
+            "p90": 121735,
+            "mean": 121735.0
+          },
+          "runs": [
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 6265,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 18,
+                "user": 6235,
+                "assistant": 12
+              },
+              "peak_context_tokens": 6265,
+              "headroom_tokens": 121735
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 6265,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 18,
+                "user": 6235,
+                "assistant": 12
+              },
+              "peak_context_tokens": 6265,
+              "headroom_tokens": 121735
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 6265,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 18,
+                "user": 6235,
+                "assistant": 12
+              },
+              "peak_context_tokens": 6265,
+              "headroom_tokens": 121735
+            }
+          ]
+        }
+      },
+      "savings_percent_median": 32.23,
+      "failure_reasons": [],
+      "pass": true
+    },
+    {
+      "id": "nested-30-records",
+      "context_limit_tokens": 128000,
+      "required_markers": [
+        "운영자 0",
+        "운영자 29",
+        "010-0000-0029",
+        "PASS",
+        "CCR marker count 0"
+      ],
+      "arms": {
+        "baseline": {
+          "n_runs": 3,
+          "n_success": 3,
+          "success_rate": 1.0,
+          "visible_tokens": {
+            "samples": [
+              1569,
+              1569,
+              1569
+            ],
+            "median": 1569,
+            "p90": 1569,
+            "mean": 1569.0
+          },
+          "tool_output_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "repeat_read_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "retry_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "headroom_tokens": {
+            "samples": [
+              126431,
+              126431,
+              126431
+            ],
+            "median": 126431,
+            "p90": 126431,
+            "mean": 126431.0
+          },
+          "runs": [
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 1569,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 18,
+                "user": 1539,
+                "assistant": 12
+              },
+              "peak_context_tokens": 1569,
+              "headroom_tokens": 126431
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 1569,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 18,
+                "user": 1539,
+                "assistant": 12
+              },
+              "peak_context_tokens": 1569,
+              "headroom_tokens": 126431
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 1569,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 18,
+                "user": 1539,
+                "assistant": 12
+              },
+              "peak_context_tokens": 1569,
+              "headroom_tokens": 126431
+            }
+          ]
+        },
+        "candidate": {
+          "n_runs": 3,
+          "n_success": 3,
+          "success_rate": 1.0,
+          "visible_tokens": {
+            "samples": [
+              1660,
+              1660,
+              1660
+            ],
+            "median": 1660,
+            "p90": 1660,
+            "mean": 1660.0
+          },
+          "tool_output_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "repeat_read_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "retry_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "headroom_tokens": {
+            "samples": [
+              126340,
+              126340,
+              126340
+            ],
+            "median": 126340,
+            "p90": 126340,
+            "mean": 126340.0
+          },
+          "runs": [
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 1660,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 18,
+                "user": 1630,
+                "assistant": 12
+              },
+              "peak_context_tokens": 1660,
+              "headroom_tokens": 126340
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 1660,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 18,
+                "user": 1630,
+                "assistant": 12
+              },
+              "peak_context_tokens": 1660,
+              "headroom_tokens": 126340
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 1660,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 18,
+                "user": 1630,
+                "assistant": 12
+              },
+              "peak_context_tokens": 1660,
+              "headroom_tokens": 126340
+            }
+          ]
+        }
+      },
+      "savings_percent_median": -5.8,
+      "failure_reasons": [
+        "candidate_not_more_token_efficient"
+      ],
+      "pass": false
+    }
+  ],
+  "pass": false,
+  "tokenizer": {
+    "library": "tiktoken",
+    "version": "0.13.0",
+    "encoding": "o200k_base",
+    "exact_for_visible_trace_text": true
+  }
+}

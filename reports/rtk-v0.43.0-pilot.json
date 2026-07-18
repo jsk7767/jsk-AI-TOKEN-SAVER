@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "benchmark_scope": "rtk_v0.43.0_supported_tool_output_pilot",
+  "billing_claim": false,
+  "minimum_safe_savings_percent": 20.0,
+  "safe_case_count": 4,
+  "safe_baseline_tokens": 3987,
+  "safe_candidate_tokens": 2938,
+  "safe_savings_percent": 26.31,
+  "threshold_pass": true,
+  "all_cases_pass": true,
+  "suite_failure_reasons": [],
+  "pass": true,
+  "cases": [
+    {
+      "id": "git-status",
+      "mode": "compact",
+      "baseline_tokens": 144,
+      "candidate_tokens": 47,
+      "savings_percent": 67.36,
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "missing_markers": [],
+      "failure_reasons": [],
+      "pass": true
+    },
+    {
+      "id": "git-diff",
+      "mode": "compact",
+      "baseline_tokens": 2846,
+      "candidate_tokens": 2788,
+      "savings_percent": 2.04,
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "missing_markers": [],
+      "failure_reasons": [],
+      "pass": true
+    },
+    {
+      "id": "git-log",
+      "mode": "clear",
+      "baseline_tokens": 200,
+      "candidate_tokens": 200,
+      "savings_percent": 0.0,
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "missing_markers": [],
+      "failure_reasons": [],
+      "pass": true
+    },
+    {
+      "id": "pytest-pass",
+      "mode": "minimal",
+      "baseline_tokens": 552,
+      "candidate_tokens": 6,
+      "savings_percent": 98.91,
+      "baseline_exit": 0,
+      "candidate_exit": 0,
+      "missing_markers": [],
+      "failure_reasons": [],
+      "pass": true
+    },
+    {
+      "id": "pytest-fail",
+      "mode": "compact",
+      "baseline_tokens": 445,
+      "candidate_tokens": 97,
+      "savings_percent": 78.2,
+      "baseline_exit": 1,
+      "candidate_exit": 1,
+      "missing_markers": [],
+      "failure_reasons": [],
+      "pass": true
+    }
+  ],
+  "tokenizer": {
+    "library": "tiktoken",
+    "version": "0.13.0",
+    "encoding": "o200k_base",
+    "exact_for_fixture_text": true
+  }
+}

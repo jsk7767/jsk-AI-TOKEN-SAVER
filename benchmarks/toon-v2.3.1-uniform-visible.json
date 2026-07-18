@@ -1,0 +1,252 @@
+{
+  "schema_version": 2,
+  "benchmark_scope": "toon_v2.3.1_uniform_serialization_visible_payload",
+  "runs_required": 3,
+  "minimum_success_rate": 1.0,
+  "tasks": [
+    {
+      "id": "uniform-pretty-json-vs-toon",
+      "context_limit_tokens": 128000,
+      "required_markers": [
+        "S-001",
+        "S-024",
+        "대구",
+        "쉼표",
+        "PASS"
+      ],
+      "arms": {
+        "baseline": [
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=pretty-json\nDATA:\n[\n  {\n    \"id\": \"S-001\",\n    \"status\": \"active\",\n    \"revenue\": 65000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-002\",\n    \"status\": \"paused\",\n    \"revenue\": 72500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-003\",\n    \"status\": \"review\",\n    \"revenue\": 80000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-004\",\n    \"status\": \"active\",\n    \"revenue\": 87500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-005\",\n    \"status\": \"paused\",\n    \"revenue\": 95000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-006\",\n    \"status\": \"review\",\n    \"revenue\": 102500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-007\",\n    \"status\": \"active\",\n    \"revenue\": 110000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-008\",\n    \"status\": \"paused\",\n    \"revenue\": 117500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-009\",\n    \"status\": \"review\",\n    \"revenue\": 125000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-010\",\n    \"status\": \"active\",\n    \"revenue\": 132500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-011\",\n    \"status\": \"paused\",\n    \"revenue\": 140000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-012\",\n    \"status\": \"review\",\n    \"revenue\": 147500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-013\",\n    \"status\": \"active\",\n    \"revenue\": 155000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-014\",\n    \"status\": \"paused\",\n    \"revenue\": 162500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-015\",\n    \"status\": \"review\",\n    \"revenue\": 170000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-016\",\n    \"status\": \"active\",\n    \"revenue\": 177500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-017\",\n    \"status\": \"paused\",\n    \"revenue\": 185000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-018\",\n    \"status\": \"review\",\n    \"revenue\": 192500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-019\",\n    \"status\": \"active\",\n    \"revenue\": 200000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-020\",\n    \"status\": \"paused\",\n    \"revenue\": 207500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-021\",\n    \"status\": \"review\",\n    \"revenue\": 215000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-022\",\n    \"status\": \"active\",\n    \"revenue\": 222500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-023\",\n    \"status\": \"paused\",\n    \"revenue\": 230000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-024\",\n    \"status\": \"review\",\n    \"revenue\": 237500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  }\n]"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          },
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=pretty-json\nDATA:\n[\n  {\n    \"id\": \"S-001\",\n    \"status\": \"active\",\n    \"revenue\": 65000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-002\",\n    \"status\": \"paused\",\n    \"revenue\": 72500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-003\",\n    \"status\": \"review\",\n    \"revenue\": 80000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-004\",\n    \"status\": \"active\",\n    \"revenue\": 87500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-005\",\n    \"status\": \"paused\",\n    \"revenue\": 95000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-006\",\n    \"status\": \"review\",\n    \"revenue\": 102500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-007\",\n    \"status\": \"active\",\n    \"revenue\": 110000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-008\",\n    \"status\": \"paused\",\n    \"revenue\": 117500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-009\",\n    \"status\": \"review\",\n    \"revenue\": 125000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-010\",\n    \"status\": \"active\",\n    \"revenue\": 132500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-011\",\n    \"status\": \"paused\",\n    \"revenue\": 140000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-012\",\n    \"status\": \"review\",\n    \"revenue\": 147500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-013\",\n    \"status\": \"active\",\n    \"revenue\": 155000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-014\",\n    \"status\": \"paused\",\n    \"revenue\": 162500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-015\",\n    \"status\": \"review\",\n    \"revenue\": 170000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-016\",\n    \"status\": \"active\",\n    \"revenue\": 177500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-017\",\n    \"status\": \"paused\",\n    \"revenue\": 185000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-018\",\n    \"status\": \"review\",\n    \"revenue\": 192500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-019\",\n    \"status\": \"active\",\n    \"revenue\": 200000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-020\",\n    \"status\": \"paused\",\n    \"revenue\": 207500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-021\",\n    \"status\": \"review\",\n    \"revenue\": 215000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-022\",\n    \"status\": \"active\",\n    \"revenue\": 222500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-023\",\n    \"status\": \"paused\",\n    \"revenue\": 230000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-024\",\n    \"status\": \"review\",\n    \"revenue\": 237500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  }\n]"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          },
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=pretty-json\nDATA:\n[\n  {\n    \"id\": \"S-001\",\n    \"status\": \"active\",\n    \"revenue\": 65000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-002\",\n    \"status\": \"paused\",\n    \"revenue\": 72500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-003\",\n    \"status\": \"review\",\n    \"revenue\": 80000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-004\",\n    \"status\": \"active\",\n    \"revenue\": 87500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-005\",\n    \"status\": \"paused\",\n    \"revenue\": 95000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-006\",\n    \"status\": \"review\",\n    \"revenue\": 102500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-007\",\n    \"status\": \"active\",\n    \"revenue\": 110000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-008\",\n    \"status\": \"paused\",\n    \"revenue\": 117500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-009\",\n    \"status\": \"review\",\n    \"revenue\": 125000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-010\",\n    \"status\": \"active\",\n    \"revenue\": 132500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-011\",\n    \"status\": \"paused\",\n    \"revenue\": 140000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-012\",\n    \"status\": \"review\",\n    \"revenue\": 147500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-013\",\n    \"status\": \"active\",\n    \"revenue\": 155000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-014\",\n    \"status\": \"paused\",\n    \"revenue\": 162500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-015\",\n    \"status\": \"review\",\n    \"revenue\": 170000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-016\",\n    \"status\": \"active\",\n    \"revenue\": 177500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-017\",\n    \"status\": \"paused\",\n    \"revenue\": 185000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-018\",\n    \"status\": \"review\",\n    \"revenue\": 192500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-019\",\n    \"status\": \"active\",\n    \"revenue\": 200000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-020\",\n    \"status\": \"paused\",\n    \"revenue\": 207500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-021\",\n    \"status\": \"review\",\n    \"revenue\": 215000,\n    \"city\": \"대구\",\n    \"note\": \"쉼표, 포함\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-022\",\n    \"status\": \"active\",\n    \"revenue\": 222500,\n    \"city\": \"서울\",\n    \"note\": \"두 줄\\n메모\",\n    \"verified\": false\n  },\n  {\n    \"id\": \"S-023\",\n    \"status\": \"paused\",\n    \"revenue\": 230000,\n    \"city\": \"대구\",\n    \"note\": \"C:\\\\stores\\\\sample\",\n    \"verified\": true\n  },\n  {\n    \"id\": \"S-024\",\n    \"status\": \"review\",\n    \"revenue\": 237500,\n    \"city\": \"서울\",\n    \"note\": \"일반 메모\",\n    \"verified\": false\n  }\n]"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          }
+        ],
+        "candidate": [
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=toon\nDATA:\n[24]{id,status,revenue,city,note,verified}:\n  S-001,active,65000,대구,\"쉼표, 포함\",true\n  S-002,paused,72500,서울,\"두 줄\\n메모\",false\n  S-003,review,80000,대구,\"C:\\\\stores\\\\sample\",true\n  S-004,active,87500,서울,일반 메모,false\n  S-005,paused,95000,대구,\"쉼표, 포함\",true\n  S-006,review,102500,서울,\"두 줄\\n메모\",false\n  S-007,active,110000,대구,\"C:\\\\stores\\\\sample\",true\n  S-008,paused,117500,서울,일반 메모,false\n  S-009,review,125000,대구,\"쉼표, 포함\",true\n  S-010,active,132500,서울,\"두 줄\\n메모\",false\n  S-011,paused,140000,대구,\"C:\\\\stores\\\\sample\",true\n  S-012,review,147500,서울,일반 메모,false\n  S-013,active,155000,대구,\"쉼표, 포함\",true\n  S-014,paused,162500,서울,\"두 줄\\n메모\",false\n  S-015,review,170000,대구,\"C:\\\\stores\\\\sample\",true\n  S-016,active,177500,서울,일반 메모,false\n  S-017,paused,185000,대구,\"쉼표, 포함\",true\n  S-018,review,192500,서울,\"두 줄\\n메모\",false\n  S-019,active,200000,대구,\"C:\\\\stores\\\\sample\",true\n  S-020,paused,207500,서울,일반 메모,false\n  S-021,review,215000,대구,\"쉼표, 포함\",true\n  S-022,active,222500,서울,\"두 줄\\n메모\",false\n  S-023,paused,230000,대구,\"C:\\\\stores\\\\sample\",true\n  S-024,review,237500,서울,일반 메모,false"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          },
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=toon\nDATA:\n[24]{id,status,revenue,city,note,verified}:\n  S-001,active,65000,대구,\"쉼표, 포함\",true\n  S-002,paused,72500,서울,\"두 줄\\n메모\",false\n  S-003,review,80000,대구,\"C:\\\\stores\\\\sample\",true\n  S-004,active,87500,서울,일반 메모,false\n  S-005,paused,95000,대구,\"쉼표, 포함\",true\n  S-006,review,102500,서울,\"두 줄\\n메모\",false\n  S-007,active,110000,대구,\"C:\\\\stores\\\\sample\",true\n  S-008,paused,117500,서울,일반 메모,false\n  S-009,review,125000,대구,\"쉼표, 포함\",true\n  S-010,active,132500,서울,\"두 줄\\n메모\",false\n  S-011,paused,140000,대구,\"C:\\\\stores\\\\sample\",true\n  S-012,review,147500,서울,일반 메모,false\n  S-013,active,155000,대구,\"쉼표, 포함\",true\n  S-014,paused,162500,서울,\"두 줄\\n메모\",false\n  S-015,review,170000,대구,\"C:\\\\stores\\\\sample\",true\n  S-016,active,177500,서울,일반 메모,false\n  S-017,paused,185000,대구,\"쉼표, 포함\",true\n  S-018,review,192500,서울,\"두 줄\\n메모\",false\n  S-019,active,200000,대구,\"C:\\\\stores\\\\sample\",true\n  S-020,paused,207500,서울,일반 메모,false\n  S-021,review,215000,대구,\"쉼표, 포함\",true\n  S-022,active,222500,서울,\"두 줄\\n메모\",false\n  S-023,paused,230000,대구,\"C:\\\\stores\\\\sample\",true\n  S-024,review,237500,서울,일반 메모,false"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          },
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=toon\nDATA:\n[24]{id,status,revenue,city,note,verified}:\n  S-001,active,65000,대구,\"쉼표, 포함\",true\n  S-002,paused,72500,서울,\"두 줄\\n메모\",false\n  S-003,review,80000,대구,\"C:\\\\stores\\\\sample\",true\n  S-004,active,87500,서울,일반 메모,false\n  S-005,paused,95000,대구,\"쉼표, 포함\",true\n  S-006,review,102500,서울,\"두 줄\\n메모\",false\n  S-007,active,110000,대구,\"C:\\\\stores\\\\sample\",true\n  S-008,paused,117500,서울,일반 메모,false\n  S-009,review,125000,대구,\"쉼표, 포함\",true\n  S-010,active,132500,서울,\"두 줄\\n메모\",false\n  S-011,paused,140000,대구,\"C:\\\\stores\\\\sample\",true\n  S-012,review,147500,서울,일반 메모,false\n  S-013,active,155000,대구,\"쉼표, 포함\",true\n  S-014,paused,162500,서울,\"두 줄\\n메모\",false\n  S-015,review,170000,대구,\"C:\\\\stores\\\\sample\",true\n  S-016,active,177500,서울,일반 메모,false\n  S-017,paused,185000,대구,\"쉼표, 포함\",true\n  S-018,review,192500,서울,\"두 줄\\n메모\",false\n  S-019,active,200000,대구,\"C:\\\\stores\\\\sample\",true\n  S-020,paused,207500,서울,일반 메모,false\n  S-021,review,215000,대구,\"쉼표, 포함\",true\n  S-022,active,222500,서울,\"두 줄\\n메모\",false\n  S-023,paused,230000,대구,\"C:\\\\stores\\\\sample\",true\n  S-024,review,237500,서울,일반 메모,false"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "uniform-compact-json-vs-toon",
+      "context_limit_tokens": 128000,
+      "required_markers": [
+        "S-001",
+        "S-024",
+        "대구",
+        "쉼표",
+        "PASS"
+      ],
+      "arms": {
+        "baseline": [
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=compact-json\nDATA:\n[{\"id\":\"S-001\",\"status\":\"active\",\"revenue\":65000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-002\",\"status\":\"paused\",\"revenue\":72500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-003\",\"status\":\"review\",\"revenue\":80000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-004\",\"status\":\"active\",\"revenue\":87500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-005\",\"status\":\"paused\",\"revenue\":95000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-006\",\"status\":\"review\",\"revenue\":102500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-007\",\"status\":\"active\",\"revenue\":110000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-008\",\"status\":\"paused\",\"revenue\":117500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-009\",\"status\":\"review\",\"revenue\":125000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-010\",\"status\":\"active\",\"revenue\":132500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-011\",\"status\":\"paused\",\"revenue\":140000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-012\",\"status\":\"review\",\"revenue\":147500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-013\",\"status\":\"active\",\"revenue\":155000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-014\",\"status\":\"paused\",\"revenue\":162500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-015\",\"status\":\"review\",\"revenue\":170000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-016\",\"status\":\"active\",\"revenue\":177500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-017\",\"status\":\"paused\",\"revenue\":185000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-018\",\"status\":\"review\",\"revenue\":192500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-019\",\"status\":\"active\",\"revenue\":200000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-020\",\"status\":\"paused\",\"revenue\":207500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-021\",\"status\":\"review\",\"revenue\":215000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-022\",\"status\":\"active\",\"revenue\":222500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-023\",\"status\":\"paused\",\"revenue\":230000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-024\",\"status\":\"review\",\"revenue\":237500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false}]"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          },
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=compact-json\nDATA:\n[{\"id\":\"S-001\",\"status\":\"active\",\"revenue\":65000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-002\",\"status\":\"paused\",\"revenue\":72500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-003\",\"status\":\"review\",\"revenue\":80000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-004\",\"status\":\"active\",\"revenue\":87500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-005\",\"status\":\"paused\",\"revenue\":95000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-006\",\"status\":\"review\",\"revenue\":102500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-007\",\"status\":\"active\",\"revenue\":110000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-008\",\"status\":\"paused\",\"revenue\":117500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-009\",\"status\":\"review\",\"revenue\":125000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-010\",\"status\":\"active\",\"revenue\":132500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-011\",\"status\":\"paused\",\"revenue\":140000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-012\",\"status\":\"review\",\"revenue\":147500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-013\",\"status\":\"active\",\"revenue\":155000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-014\",\"status\":\"paused\",\"revenue\":162500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-015\",\"status\":\"review\",\"revenue\":170000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-016\",\"status\":\"active\",\"revenue\":177500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-017\",\"status\":\"paused\",\"revenue\":185000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-018\",\"status\":\"review\",\"revenue\":192500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-019\",\"status\":\"active\",\"revenue\":200000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-020\",\"status\":\"paused\",\"revenue\":207500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-021\",\"status\":\"review\",\"revenue\":215000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-022\",\"status\":\"active\",\"revenue\":222500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-023\",\"status\":\"paused\",\"revenue\":230000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-024\",\"status\":\"review\",\"revenue\":237500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false}]"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          },
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=compact-json\nDATA:\n[{\"id\":\"S-001\",\"status\":\"active\",\"revenue\":65000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-002\",\"status\":\"paused\",\"revenue\":72500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-003\",\"status\":\"review\",\"revenue\":80000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-004\",\"status\":\"active\",\"revenue\":87500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-005\",\"status\":\"paused\",\"revenue\":95000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-006\",\"status\":\"review\",\"revenue\":102500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-007\",\"status\":\"active\",\"revenue\":110000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-008\",\"status\":\"paused\",\"revenue\":117500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-009\",\"status\":\"review\",\"revenue\":125000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-010\",\"status\":\"active\",\"revenue\":132500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-011\",\"status\":\"paused\",\"revenue\":140000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-012\",\"status\":\"review\",\"revenue\":147500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-013\",\"status\":\"active\",\"revenue\":155000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-014\",\"status\":\"paused\",\"revenue\":162500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-015\",\"status\":\"review\",\"revenue\":170000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-016\",\"status\":\"active\",\"revenue\":177500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-017\",\"status\":\"paused\",\"revenue\":185000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-018\",\"status\":\"review\",\"revenue\":192500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-019\",\"status\":\"active\",\"revenue\":200000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-020\",\"status\":\"paused\",\"revenue\":207500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false},{\"id\":\"S-021\",\"status\":\"review\",\"revenue\":215000,\"city\":\"대구\",\"note\":\"쉼표, 포함\",\"verified\":true},{\"id\":\"S-022\",\"status\":\"active\",\"revenue\":222500,\"city\":\"서울\",\"note\":\"두 줄\\n메모\",\"verified\":false},{\"id\":\"S-023\",\"status\":\"paused\",\"revenue\":230000,\"city\":\"대구\",\"note\":\"C:\\\\stores\\\\sample\",\"verified\":true},{\"id\":\"S-024\",\"status\":\"review\",\"revenue\":237500,\"city\":\"서울\",\"note\":\"일반 메모\",\"verified\":false}]"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          }
+        ],
+        "candidate": [
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=toon\nDATA:\n[24]{id,status,revenue,city,note,verified}:\n  S-001,active,65000,대구,\"쉼표, 포함\",true\n  S-002,paused,72500,서울,\"두 줄\\n메모\",false\n  S-003,review,80000,대구,\"C:\\\\stores\\\\sample\",true\n  S-004,active,87500,서울,일반 메모,false\n  S-005,paused,95000,대구,\"쉼표, 포함\",true\n  S-006,review,102500,서울,\"두 줄\\n메모\",false\n  S-007,active,110000,대구,\"C:\\\\stores\\\\sample\",true\n  S-008,paused,117500,서울,일반 메모,false\n  S-009,review,125000,대구,\"쉼표, 포함\",true\n  S-010,active,132500,서울,\"두 줄\\n메모\",false\n  S-011,paused,140000,대구,\"C:\\\\stores\\\\sample\",true\n  S-012,review,147500,서울,일반 메모,false\n  S-013,active,155000,대구,\"쉼표, 포함\",true\n  S-014,paused,162500,서울,\"두 줄\\n메모\",false\n  S-015,review,170000,대구,\"C:\\\\stores\\\\sample\",true\n  S-016,active,177500,서울,일반 메모,false\n  S-017,paused,185000,대구,\"쉼표, 포함\",true\n  S-018,review,192500,서울,\"두 줄\\n메모\",false\n  S-019,active,200000,대구,\"C:\\\\stores\\\\sample\",true\n  S-020,paused,207500,서울,일반 메모,false\n  S-021,review,215000,대구,\"쉼표, 포함\",true\n  S-022,active,222500,서울,\"두 줄\\n메모\",false\n  S-023,paused,230000,대구,\"C:\\\\stores\\\\sample\",true\n  S-024,review,237500,서울,일반 메모,false"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          },
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=toon\nDATA:\n[24]{id,status,revenue,city,note,verified}:\n  S-001,active,65000,대구,\"쉼표, 포함\",true\n  S-002,paused,72500,서울,\"두 줄\\n메모\",false\n  S-003,review,80000,대구,\"C:\\\\stores\\\\sample\",true\n  S-004,active,87500,서울,일반 메모,false\n  S-005,paused,95000,대구,\"쉼표, 포함\",true\n  S-006,review,102500,서울,\"두 줄\\n메모\",false\n  S-007,active,110000,대구,\"C:\\\\stores\\\\sample\",true\n  S-008,paused,117500,서울,일반 메모,false\n  S-009,review,125000,대구,\"쉼표, 포함\",true\n  S-010,active,132500,서울,\"두 줄\\n메모\",false\n  S-011,paused,140000,대구,\"C:\\\\stores\\\\sample\",true\n  S-012,review,147500,서울,일반 메모,false\n  S-013,active,155000,대구,\"쉼표, 포함\",true\n  S-014,paused,162500,서울,\"두 줄\\n메모\",false\n  S-015,review,170000,대구,\"C:\\\\stores\\\\sample\",true\n  S-016,active,177500,서울,일반 메모,false\n  S-017,paused,185000,대구,\"쉼표, 포함\",true\n  S-018,review,192500,서울,\"두 줄\\n메모\",false\n  S-019,active,200000,대구,\"C:\\\\stores\\\\sample\",true\n  S-020,paused,207500,서울,일반 메모,false\n  S-021,review,215000,대구,\"쉼표, 포함\",true\n  S-022,active,222500,서울,\"두 줄\\n메모\",false\n  S-023,paused,230000,대구,\"C:\\\\stores\\\\sample\",true\n  S-024,review,237500,서울,일반 메모,false"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          },
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=toon\nDATA:\n[24]{id,status,revenue,city,note,verified}:\n  S-001,active,65000,대구,\"쉼표, 포함\",true\n  S-002,paused,72500,서울,\"두 줄\\n메모\",false\n  S-003,review,80000,대구,\"C:\\\\stores\\\\sample\",true\n  S-004,active,87500,서울,일반 메모,false\n  S-005,paused,95000,대구,\"쉼표, 포함\",true\n  S-006,review,102500,서울,\"두 줄\\n메모\",false\n  S-007,active,110000,대구,\"C:\\\\stores\\\\sample\",true\n  S-008,paused,117500,서울,일반 메모,false\n  S-009,review,125000,대구,\"쉼표, 포함\",true\n  S-010,active,132500,서울,\"두 줄\\n메모\",false\n  S-011,paused,140000,대구,\"C:\\\\stores\\\\sample\",true\n  S-012,review,147500,서울,일반 메모,false\n  S-013,active,155000,대구,\"쉼표, 포함\",true\n  S-014,paused,162500,서울,\"두 줄\\n메모\",false\n  S-015,review,170000,대구,\"C:\\\\stores\\\\sample\",true\n  S-016,active,177500,서울,일반 메모,false\n  S-017,paused,185000,대구,\"쉼표, 포함\",true\n  S-018,review,192500,서울,\"두 줄\\n메모\",false\n  S-019,active,200000,대구,\"C:\\\\stores\\\\sample\",true\n  S-020,paused,207500,서울,일반 메모,false\n  S-021,review,215000,대구,\"쉼표, 포함\",true\n  S-022,active,222500,서울,\"두 줄\\n메모\",false\n  S-023,paused,230000,대구,\"C:\\\\stores\\\\sample\",true\n  S-024,review,237500,서울,일반 메모,false"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "measurement_note": "Deterministic serialization traces repeated three times; success means exact encode/decode round-trip, not model comprehension.",
+  "source": {
+    "repository": "https://github.com/toon-format/toon",
+    "version": "2.3.1",
+    "commit": "352a5b017d190cb01d6fc70e18fcaf06f9bbc6e5"
+  }
+}

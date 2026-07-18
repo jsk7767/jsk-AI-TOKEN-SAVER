@@ -1,0 +1,133 @@
+{
+  "schema_version": 2,
+  "benchmark_scope": "toon_v2.3.1_nested_guard_visible_payload",
+  "runs_required": 3,
+  "minimum_success_rate": 1.0,
+  "tasks": [
+    {
+      "id": "nested-compact-json-vs-toon-guard",
+      "context_limit_tokens": 128000,
+      "required_markers": [
+        "N-1",
+        "N-8",
+        "ko-KR",
+        "카카오톡",
+        "PASS"
+      ],
+      "arms": {
+        "baseline": [
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=compact-json\nDATA:\n{\"context\":{\"goal\":\"중첩된 운영 설정과 비균일 이벤트를 검증한다\",\"locale\":\"ko-KR\",\"paths\":[\"C:\\\\stores\\\\one\",\"C:\\\\stores\\\\two\"]},\"stores\":[{\"id\":\"N-1\",\"owner\":{\"name\":\"운영자 1\",\"contacts\":{\"phone\":\"010-0000-0000\",\"email\":null}},\"tags\":[\"한식\",\"예약\"],\"metrics\":{\"daily\":[0,0,0],\"flags\":{\"rain\":true,\"event\":true}},\"optional\":{\"memo\":\"쉼표, 따옴표 \\\" 포함\"}},{\"id\":\"N-2\",\"owner\":{\"name\":\"운영자 2\",\"contacts\":{\"messenger\":\"카카오톡\"}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[10,20,30],\"flags\":{\"rain\":false,\"event\":false}},\"optional\":null},{\"id\":\"N-3\",\"owner\":{\"name\":\"운영자 3\",\"contacts\":{\"phone\":\"010-0000-0020\",\"email\":null}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[20,40,60],\"flags\":{\"rain\":true,\"event\":false}},\"optional\":{\"memo\":\"쉼표, 따옴표 \\\" 포함\"}},{\"id\":\"N-4\",\"owner\":{\"name\":\"운영자 4\",\"contacts\":{\"messenger\":\"카카오톡\"}},\"tags\":[\"한식\",\"예약\"],\"metrics\":{\"daily\":[30,60,90],\"flags\":{\"rain\":false,\"event\":false}},\"optional\":null},{\"id\":\"N-5\",\"owner\":{\"name\":\"운영자 5\",\"contacts\":{\"phone\":\"010-0000-0040\",\"email\":null}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[40,80,120],\"flags\":{\"rain\":true,\"event\":true}},\"optional\":{\"memo\":\"쉼표, 따옴표 \\\" 포함\"}},{\"id\":\"N-6\",\"owner\":{\"name\":\"운영자 6\",\"contacts\":{\"messenger\":\"카카오톡\"}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[50,100,150],\"flags\":{\"rain\":false,\"event\":false}},\"optional\":null},{\"id\":\"N-7\",\"owner\":{\"name\":\"운영자 7\",\"contacts\":{\"phone\":\"010-0000-0060\",\"email\":null}},\"tags\":[\"한식\",\"예약\"],\"metrics\":{\"daily\":[60,120,180],\"flags\":{\"rain\":true,\"event\":false}},\"optional\":{\"memo\":\"쉼표, 따옴표 \\\" 포함\"}},{\"id\":\"N-8\",\"owner\":{\"name\":\"운영자 8\",\"contacts\":{\"messenger\":\"카카오톡\"}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[70,140,210],\"flags\":{\"rain\":false,\"event\":false}},\"optional\":null}]}"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          },
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=compact-json\nDATA:\n{\"context\":{\"goal\":\"중첩된 운영 설정과 비균일 이벤트를 검증한다\",\"locale\":\"ko-KR\",\"paths\":[\"C:\\\\stores\\\\one\",\"C:\\\\stores\\\\two\"]},\"stores\":[{\"id\":\"N-1\",\"owner\":{\"name\":\"운영자 1\",\"contacts\":{\"phone\":\"010-0000-0000\",\"email\":null}},\"tags\":[\"한식\",\"예약\"],\"metrics\":{\"daily\":[0,0,0],\"flags\":{\"rain\":true,\"event\":true}},\"optional\":{\"memo\":\"쉼표, 따옴표 \\\" 포함\"}},{\"id\":\"N-2\",\"owner\":{\"name\":\"운영자 2\",\"contacts\":{\"messenger\":\"카카오톡\"}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[10,20,30],\"flags\":{\"rain\":false,\"event\":false}},\"optional\":null},{\"id\":\"N-3\",\"owner\":{\"name\":\"운영자 3\",\"contacts\":{\"phone\":\"010-0000-0020\",\"email\":null}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[20,40,60],\"flags\":{\"rain\":true,\"event\":false}},\"optional\":{\"memo\":\"쉼표, 따옴표 \\\" 포함\"}},{\"id\":\"N-4\",\"owner\":{\"name\":\"운영자 4\",\"contacts\":{\"messenger\":\"카카오톡\"}},\"tags\":[\"한식\",\"예약\"],\"metrics\":{\"daily\":[30,60,90],\"flags\":{\"rain\":false,\"event\":false}},\"optional\":null},{\"id\":\"N-5\",\"owner\":{\"name\":\"운영자 5\",\"contacts\":{\"phone\":\"010-0000-0040\",\"email\":null}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[40,80,120],\"flags\":{\"rain\":true,\"event\":true}},\"optional\":{\"memo\":\"쉼표, 따옴표 \\\" 포함\"}},{\"id\":\"N-6\",\"owner\":{\"name\":\"운영자 6\",\"contacts\":{\"messenger\":\"카카오톡\"}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[50,100,150],\"flags\":{\"rain\":false,\"event\":false}},\"optional\":null},{\"id\":\"N-7\",\"owner\":{\"name\":\"운영자 7\",\"contacts\":{\"phone\":\"010-0000-0060\",\"email\":null}},\"tags\":[\"한식\",\"예약\"],\"metrics\":{\"daily\":[60,120,180],\"flags\":{\"rain\":true,\"event\":false}},\"optional\":{\"memo\":\"쉼표, 따옴표 \\\" 포함\"}},{\"id\":\"N-8\",\"owner\":{\"name\":\"운영자 8\",\"contacts\":{\"messenger\":\"카카오톡\"}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[70,140,210],\"flags\":{\"rain\":false,\"event\":false}},\"optional\":null}]}"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          },
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=compact-json\nDATA:\n{\"context\":{\"goal\":\"중첩된 운영 설정과 비균일 이벤트를 검증한다\",\"locale\":\"ko-KR\",\"paths\":[\"C:\\\\stores\\\\one\",\"C:\\\\stores\\\\two\"]},\"stores\":[{\"id\":\"N-1\",\"owner\":{\"name\":\"운영자 1\",\"contacts\":{\"phone\":\"010-0000-0000\",\"email\":null}},\"tags\":[\"한식\",\"예약\"],\"metrics\":{\"daily\":[0,0,0],\"flags\":{\"rain\":true,\"event\":true}},\"optional\":{\"memo\":\"쉼표, 따옴표 \\\" 포함\"}},{\"id\":\"N-2\",\"owner\":{\"name\":\"운영자 2\",\"contacts\":{\"messenger\":\"카카오톡\"}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[10,20,30],\"flags\":{\"rain\":false,\"event\":false}},\"optional\":null},{\"id\":\"N-3\",\"owner\":{\"name\":\"운영자 3\",\"contacts\":{\"phone\":\"010-0000-0020\",\"email\":null}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[20,40,60],\"flags\":{\"rain\":true,\"event\":false}},\"optional\":{\"memo\":\"쉼표, 따옴표 \\\" 포함\"}},{\"id\":\"N-4\",\"owner\":{\"name\":\"운영자 4\",\"contacts\":{\"messenger\":\"카카오톡\"}},\"tags\":[\"한식\",\"예약\"],\"metrics\":{\"daily\":[30,60,90],\"flags\":{\"rain\":false,\"event\":false}},\"optional\":null},{\"id\":\"N-5\",\"owner\":{\"name\":\"운영자 5\",\"contacts\":{\"phone\":\"010-0000-0040\",\"email\":null}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[40,80,120],\"flags\":{\"rain\":true,\"event\":true}},\"optional\":{\"memo\":\"쉼표, 따옴표 \\\" 포함\"}},{\"id\":\"N-6\",\"owner\":{\"name\":\"운영자 6\",\"contacts\":{\"messenger\":\"카카오톡\"}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[50,100,150],\"flags\":{\"rain\":false,\"event\":false}},\"optional\":null},{\"id\":\"N-7\",\"owner\":{\"name\":\"운영자 7\",\"contacts\":{\"phone\":\"010-0000-0060\",\"email\":null}},\"tags\":[\"한식\",\"예약\"],\"metrics\":{\"daily\":[60,120,180],\"flags\":{\"rain\":true,\"event\":false}},\"optional\":{\"memo\":\"쉼표, 따옴표 \\\" 포함\"}},{\"id\":\"N-8\",\"owner\":{\"name\":\"운영자 8\",\"contacts\":{\"messenger\":\"카카오톡\"}},\"tags\":[\"주점\"],\"metrics\":{\"daily\":[70,140,210],\"flags\":{\"rain\":false,\"event\":false}},\"optional\":null}]}"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          }
+        ],
+        "candidate": [
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=toon\nDATA:\ncontext:\n  goal: 중첩된 운영 설정과 비균일 이벤트를 검증한다\n  locale: ko-KR\n  paths[2]: \"C:\\\\stores\\\\one\",\"C:\\\\stores\\\\two\"\nstores[8]:\n  - id: N-1\n    owner:\n      name: 운영자 1\n      contacts:\n        phone: 010-0000-0000\n        email: null\n    tags[2]: 한식,예약\n    metrics:\n      daily[3]: 0,0,0\n      flags:\n        rain: true\n        event: true\n    optional:\n      memo: \"쉼표, 따옴표 \\\" 포함\"\n  - id: N-2\n    owner:\n      name: 운영자 2\n      contacts:\n        messenger: 카카오톡\n    tags[1]: 주점\n    metrics:\n      daily[3]: 10,20,30\n      flags:\n        rain: false\n        event: false\n    optional: null\n  - id: N-3\n    owner:\n      name: 운영자 3\n      contacts:\n        phone: 010-0000-0020\n        email: null\n    tags[1]: 주점\n    metrics:\n      daily[3]: 20,40,60\n      flags:\n        rain: true\n        event: false\n    optional:\n      memo: \"쉼표, 따옴표 \\\" 포함\"\n  - id: N-4\n    owner:\n      name: 운영자 4\n      contacts:\n        messenger: 카카오톡\n    tags[2]: 한식,예약\n    metrics:\n      daily[3]: 30,60,90\n      flags:\n        rain: false\n        event: false\n    optional: null\n  - id: N-5\n    owner:\n      name: 운영자 5\n      contacts:\n        phone: 010-0000-0040\n        email: null\n    tags[1]: 주점\n    metrics:\n      daily[3]: 40,80,120\n      flags:\n        rain: true\n        event: true\n    optional:\n      memo: \"쉼표, 따옴표 \\\" 포함\"\n  - id: N-6\n    owner:\n      name: 운영자 6\n      contacts:\n        messenger: 카카오톡\n    tags[1]: 주점\n    metrics:\n      daily[3]: 50,100,150\n      flags:\n        rain: false\n        event: false\n    optional: null\n  - id: N-7\n    owner:\n      name: 운영자 7\n      contacts:\n        phone: 010-0000-0060\n        email: null\n    tags[2]: 한식,예약\n    metrics:\n      daily[3]: 60,120,180\n      flags:\n        rain: true\n        event: false\n    optional:\n      memo: \"쉼표, 따옴표 \\\" 포함\"\n  - id: N-8\n    owner:\n      name: 운영자 8\n      contacts:\n        messenger: 카카오톡\n    tags[1]: 주점\n    metrics:\n      daily[3]: 70,140,210\n      flags:\n        rain: false\n        event: false\n    optional: null"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          },
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=toon\nDATA:\ncontext:\n  goal: 중첩된 운영 설정과 비균일 이벤트를 검증한다\n  locale: ko-KR\n  paths[2]: \"C:\\\\stores\\\\one\",\"C:\\\\stores\\\\two\"\nstores[8]:\n  - id: N-1\n    owner:\n      name: 운영자 1\n      contacts:\n        phone: 010-0000-0000\n        email: null\n    tags[2]: 한식,예약\n    metrics:\n      daily[3]: 0,0,0\n      flags:\n        rain: true\n        event: true\n    optional:\n      memo: \"쉼표, 따옴표 \\\" 포함\"\n  - id: N-2\n    owner:\n      name: 운영자 2\n      contacts:\n        messenger: 카카오톡\n    tags[1]: 주점\n    metrics:\n      daily[3]: 10,20,30\n      flags:\n        rain: false\n        event: false\n    optional: null\n  - id: N-3\n    owner:\n      name: 운영자 3\n      contacts:\n        phone: 010-0000-0020\n        email: null\n    tags[1]: 주점\n    metrics:\n      daily[3]: 20,40,60\n      flags:\n        rain: true\n        event: false\n    optional:\n      memo: \"쉼표, 따옴표 \\\" 포함\"\n  - id: N-4\n    owner:\n      name: 운영자 4\n      contacts:\n        messenger: 카카오톡\n    tags[2]: 한식,예약\n    metrics:\n      daily[3]: 30,60,90\n      flags:\n        rain: false\n        event: false\n    optional: null\n  - id: N-5\n    owner:\n      name: 운영자 5\n      contacts:\n        phone: 010-0000-0040\n        email: null\n    tags[1]: 주점\n    metrics:\n      daily[3]: 40,80,120\n      flags:\n        rain: true\n        event: true\n    optional:\n      memo: \"쉼표, 따옴표 \\\" 포함\"\n  - id: N-6\n    owner:\n      name: 운영자 6\n      contacts:\n        messenger: 카카오톡\n    tags[1]: 주점\n    metrics:\n      daily[3]: 50,100,150\n      flags:\n        rain: false\n        event: false\n    optional: null\n  - id: N-7\n    owner:\n      name: 운영자 7\n      contacts:\n        phone: 010-0000-0060\n        email: null\n    tags[2]: 한식,예약\n    metrics:\n      daily[3]: 60,120,180\n      flags:\n        rain: true\n        event: false\n    optional:\n      memo: \"쉼표, 따옴표 \\\" 포함\"\n  - id: N-8\n    owner:\n      name: 운영자 8\n      contacts:\n        messenger: 카카오톡\n    tags[1]: 주점\n    metrics:\n      daily[3]: 70,140,210\n      flags:\n        rain: false\n        event: false\n    optional: null"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          },
+          {
+            "success": true,
+            "messages": [
+              {
+                "role": "system",
+                "text": "Deterministic serialization audit. Preserve all fields and values."
+              },
+              {
+                "role": "user",
+                "text": "FORMAT=toon\nDATA:\ncontext:\n  goal: 중첩된 운영 설정과 비균일 이벤트를 검증한다\n  locale: ko-KR\n  paths[2]: \"C:\\\\stores\\\\one\",\"C:\\\\stores\\\\two\"\nstores[8]:\n  - id: N-1\n    owner:\n      name: 운영자 1\n      contacts:\n        phone: 010-0000-0000\n        email: null\n    tags[2]: 한식,예약\n    metrics:\n      daily[3]: 0,0,0\n      flags:\n        rain: true\n        event: true\n    optional:\n      memo: \"쉼표, 따옴표 \\\" 포함\"\n  - id: N-2\n    owner:\n      name: 운영자 2\n      contacts:\n        messenger: 카카오톡\n    tags[1]: 주점\n    metrics:\n      daily[3]: 10,20,30\n      flags:\n        rain: false\n        event: false\n    optional: null\n  - id: N-3\n    owner:\n      name: 운영자 3\n      contacts:\n        phone: 010-0000-0020\n        email: null\n    tags[1]: 주점\n    metrics:\n      daily[3]: 20,40,60\n      flags:\n        rain: true\n        event: false\n    optional:\n      memo: \"쉼표, 따옴표 \\\" 포함\"\n  - id: N-4\n    owner:\n      name: 운영자 4\n      contacts:\n        messenger: 카카오톡\n    tags[2]: 한식,예약\n    metrics:\n      daily[3]: 30,60,90\n      flags:\n        rain: false\n        event: false\n    optional: null\n  - id: N-5\n    owner:\n      name: 운영자 5\n      contacts:\n        phone: 010-0000-0040\n        email: null\n    tags[1]: 주점\n    metrics:\n      daily[3]: 40,80,120\n      flags:\n        rain: true\n        event: true\n    optional:\n      memo: \"쉼표, 따옴표 \\\" 포함\"\n  - id: N-6\n    owner:\n      name: 운영자 6\n      contacts:\n        messenger: 카카오톡\n    tags[1]: 주점\n    metrics:\n      daily[3]: 50,100,150\n      flags:\n        rain: false\n        event: false\n    optional: null\n  - id: N-7\n    owner:\n      name: 운영자 7\n      contacts:\n        phone: 010-0000-0060\n        email: null\n    tags[2]: 한식,예약\n    metrics:\n      daily[3]: 60,120,180\n      flags:\n        rain: true\n        event: false\n    optional:\n      memo: \"쉼표, 따옴표 \\\" 포함\"\n  - id: N-8\n    owner:\n      name: 운영자 8\n      contacts:\n        messenger: 카카오톡\n    tags[1]: 주점\n    metrics:\n      daily[3]: 70,140,210\n      flags:\n        rain: false\n        event: false\n    optional: null"
+              },
+              {
+                "role": "assistant",
+                "text": "PASS round-trip equality verified."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "measurement_note": "Expected guard: TOON may be larger than compact JSON for deeply nested or non-uniform data. Round-trip must still be exact.",
+  "source": {
+    "repository": "https://github.com/toon-format/toon",
+    "version": "2.3.1",
+    "commit": "352a5b017d190cb01d6fc70e18fcaf06f9bbc6e5"
+  }
+}

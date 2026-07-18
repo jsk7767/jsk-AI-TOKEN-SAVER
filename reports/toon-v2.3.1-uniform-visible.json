@@ -1,0 +1,471 @@
+{
+  "schema_version": 2,
+  "benchmark_scope": "toon_v2.3.1_uniform_serialization_visible_payload",
+  "metric": "visible_tokens_per_correct_task",
+  "billing_claim": false,
+  "hidden_reasoning_measured": false,
+  "runs_required": 3,
+  "minimum_success_rate": 1.0,
+  "suite_failure_reasons": [],
+  "tasks": [
+    {
+      "id": "uniform-pretty-json-vs-toon",
+      "context_limit_tokens": 128000,
+      "required_markers": [
+        "S-001",
+        "S-024",
+        "대구",
+        "쉼표",
+        "PASS"
+      ],
+      "arms": {
+        "baseline": {
+          "n_runs": 3,
+          "n_success": 3,
+          "success_rate": 1.0,
+          "visible_tokens": {
+            "samples": [
+              1305,
+              1305,
+              1305
+            ],
+            "median": 1305,
+            "p90": 1305,
+            "mean": 1305.0
+          },
+          "tool_output_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "repeat_read_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "retry_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "headroom_tokens": {
+            "samples": [
+              126695,
+              126695,
+              126695
+            ],
+            "median": 126695,
+            "p90": 126695,
+            "mean": 126695.0
+          },
+          "runs": [
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 1305,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 12,
+                "user": 1287,
+                "assistant": 6
+              },
+              "peak_context_tokens": 1305,
+              "headroom_tokens": 126695
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 1305,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 12,
+                "user": 1287,
+                "assistant": 6
+              },
+              "peak_context_tokens": 1305,
+              "headroom_tokens": 126695
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 1305,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 12,
+                "user": 1287,
+                "assistant": 6
+              },
+              "peak_context_tokens": 1305,
+              "headroom_tokens": 126695
+            }
+          ]
+        },
+        "candidate": {
+          "n_runs": 3,
+          "n_success": 3,
+          "success_rate": 1.0,
+          "visible_tokens": {
+            "samples": [
+              518,
+              518,
+              518
+            ],
+            "median": 518,
+            "p90": 518,
+            "mean": 518.0
+          },
+          "tool_output_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "repeat_read_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "retry_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "headroom_tokens": {
+            "samples": [
+              127482,
+              127482,
+              127482
+            ],
+            "median": 127482,
+            "p90": 127482,
+            "mean": 127482.0
+          },
+          "runs": [
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 518,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 12,
+                "user": 500,
+                "assistant": 6
+              },
+              "peak_context_tokens": 518,
+              "headroom_tokens": 127482
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 518,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 12,
+                "user": 500,
+                "assistant": 6
+              },
+              "peak_context_tokens": 518,
+              "headroom_tokens": 127482
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 518,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 12,
+                "user": 500,
+                "assistant": 6
+              },
+              "peak_context_tokens": 518,
+              "headroom_tokens": 127482
+            }
+          ]
+        }
+      },
+      "savings_percent_median": 60.31,
+      "failure_reasons": [],
+      "pass": true
+    },
+    {
+      "id": "uniform-compact-json-vs-toon",
+      "context_limit_tokens": 128000,
+      "required_markers": [
+        "S-001",
+        "S-024",
+        "대구",
+        "쉼표",
+        "PASS"
+      ],
+      "arms": {
+        "baseline": {
+          "n_runs": 3,
+          "n_success": 3,
+          "success_rate": 1.0,
+          "visible_tokens": {
+            "samples": [
+              801,
+              801,
+              801
+            ],
+            "median": 801,
+            "p90": 801,
+            "mean": 801.0
+          },
+          "tool_output_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "repeat_read_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "retry_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "headroom_tokens": {
+            "samples": [
+              127199,
+              127199,
+              127199
+            ],
+            "median": 127199,
+            "p90": 127199,
+            "mean": 127199.0
+          },
+          "runs": [
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 801,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 12,
+                "user": 783,
+                "assistant": 6
+              },
+              "peak_context_tokens": 801,
+              "headroom_tokens": 127199
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 801,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 12,
+                "user": 783,
+                "assistant": 6
+              },
+              "peak_context_tokens": 801,
+              "headroom_tokens": 127199
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 801,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 12,
+                "user": 783,
+                "assistant": 6
+              },
+              "peak_context_tokens": 801,
+              "headroom_tokens": 127199
+            }
+          ]
+        },
+        "candidate": {
+          "n_runs": 3,
+          "n_success": 3,
+          "success_rate": 1.0,
+          "visible_tokens": {
+            "samples": [
+              518,
+              518,
+              518
+            ],
+            "median": 518,
+            "p90": 518,
+            "mean": 518.0
+          },
+          "tool_output_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "repeat_read_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "retry_tokens": {
+            "samples": [
+              0,
+              0,
+              0
+            ],
+            "median": 0,
+            "p90": 0,
+            "mean": 0.0
+          },
+          "headroom_tokens": {
+            "samples": [
+              127482,
+              127482,
+              127482
+            ],
+            "median": 127482,
+            "p90": 127482,
+            "mean": 127482.0
+          },
+          "runs": [
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 518,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 12,
+                "user": 500,
+                "assistant": 6
+              },
+              "peak_context_tokens": 518,
+              "headroom_tokens": 127482
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 518,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 12,
+                "user": 500,
+                "assistant": 6
+              },
+              "peak_context_tokens": 518,
+              "headroom_tokens": 127482
+            },
+            {
+              "success": true,
+              "declared_success": true,
+              "missing_markers": [],
+              "visible_tokens": 518,
+              "tool_output_tokens": 0,
+              "repeat_read_tokens": 0,
+              "retry_tokens": 0,
+              "role_tokens": {
+                "system": 12,
+                "user": 500,
+                "assistant": 6
+              },
+              "peak_context_tokens": 518,
+              "headroom_tokens": 127482
+            }
+          ]
+        }
+      },
+      "savings_percent_median": 35.33,
+      "failure_reasons": [],
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "tokenizer": {
+    "library": "tiktoken",
+    "version": "0.13.0",
+    "encoding": "o200k_base",
+    "exact_for_visible_trace_text": true
+  }
+}

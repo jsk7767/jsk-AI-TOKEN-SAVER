@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "name": "jsk AI TOKEN SAVER generic report compression fixtures",
+  "benchmark_scope": "synthetic_generic_agent_report_fixtures",
+  "billing_claim": false,
+  "minimum_safe_savings_percent": 35,
+  "cases": [
+    {
+      "id": "investigator-code-location",
+      "mode": "minimal",
+      "baseline": "조사 결과 컨텍스트 로딩 동작은 src/context_loader.py 파일의 42번째 줄에 정의된 load_context 함수에서 시작합니다. 이 함수는 요청과 관련된 파일만 선택해야 하지만 현재는 전체 문서를 읽는 경로도 함께 호출하고 있습니다. 수정 전 호출부와 테스트를 함께 확인해야 합니다.",
+      "candidate": "[조사]\n- src/context_loader.py:42 — load_context — 전체 문서 로딩 경로 확인\n[판정] FOUND",
+      "required_markers": [
+        "src/context_loader.py:42",
+        "load_context",
+        "FOUND"
+      ]
+    },
+    {
+      "id": "worker-change-handoff",
+      "mode": "compact",
+      "baseline": "src/context_loader.py에서 관련 파일만 선택하도록 로딩 조건을 수정했습니다. tests/test_context_loader.py에 무관한 파일을 제외하는 회귀 테스트를 추가했습니다. python -m unittest discover -s tests -v 명령을 실행했고 전체 테스트가 통과했습니다. 배포나 외부 전송은 수행하지 않았습니다.",
+      "candidate": "[변경] src/context_loader.py, tests/test_context_loader.py\n[검증] unittest PASS\n[판정] DONE",
+      "required_markers": [
+        "src/context_loader.py",
+        "tests/test_context_loader.py",
+        "PASS",
+        "DONE"
+      ]
+    },
+    {
+      "id": "reviewer-finding",
+      "mode": "minimal",
+      "baseline": "코드 리뷰 결과 scripts/trace_parser.py 88번째 줄에서 실패한 실행도 성공 표본에 포함될 수 있습니다. 이 상태에서는 후보 토큰 수가 실제보다 낮게 계산될 위험이 있으므로 성공 조건을 먼저 확인한 뒤 표본에 포함하도록 수정해야 합니다. 중요도는 HIGH이며 현재 판정은 CHANGES_REQUESTED입니다.",
+      "candidate": "[리뷰]\n- scripts/trace_parser.py:88 — HIGH — 실패 실행이 성공 표본에 포함됨\n[판정] CHANGES_REQUESTED",
+      "required_markers": [
+        "scripts/trace_parser.py:88",
+        "HIGH",
+        "CHANGES_REQUESTED"
+      ]
+    },
+    {
+      "id": "qa-verification-handoff",
+      "mode": "compact",
+      "baseline": "검증을 위해 단위 테스트와 합성 fixture 재생성을 수행했습니다. 단위 테스트 18개가 모두 통과했고 생성한 JSON 보고서가 저장된 기준선과 일치했습니다. 필수 marker 누락은 없었으며 예상 실패 fixture는 exit code 1로 차단되었습니다. 최종 판정은 PASS입니다.",
+      "candidate": "[검증]\n- unittest 18/18 PASS\n- 보고서 재현 PASS\n- expected-fail exit 1 PASS\n[판정] PASS",
+      "required_markers": [
+        "18/18",
+        "보고서 재현",
+        "exit 1",
+        "PASS"
+      ]
+    },
+    {
+      "id": "server-incident-protected",
+      "mode": "clear",
+      "baseline": "상태: 공개 API health check가 실패했습니다.\n의미: 사용자가 서비스를 이용할 수 없는 상태일 수 있습니다.\n조치: 로그를 읽어 원인 범위를 확인했으며 운영 배포나 재시작은 수행하지 않았습니다.\n검증: health endpoint FAIL.\n지금 할 일: 운영자 승인 후 복구 절차를 진행해야 합니다.\nPASS/FAIL: FAIL",
+      "candidate": "상태: 공개 API health check 실패.\n의미: 사용자 접근 장애 가능.\n조치: 로그 확인만 수행했고 배포·재시작은 하지 않음.\n검증: health FAIL.\n지금 할 일: 운영자 승인 후 복구.\nPASS/FAIL: FAIL",
+      "required_markers": [
+        "상태:",
+        "의미:",
+        "조치:",
+        "검증:",
+        "지금 할 일:",
+        "PASS/FAIL: FAIL"
+      ]
+    },
+    {
+      "id": "security-alert-protected",
+      "mode": "clear",
+      "baseline": "구분: 공격 시도이며 실제 침입은 확인되지 않았습니다.\nIP: 192.0.2.10 (문서용 예시 주소).\n횟수: 14회.\n시간 범위: 합성 테스트 기준 10분.\n현재 보호 상태: 인증 실패로 요청이 차단되었습니다.\n지금 할 일: 동일 패턴이 증가하는지만 모니터링합니다.\nPASS/FAIL: PASS",
+      "candidate": "구분: 공격 시도 / 실제 침입 미확인.\nIP: 192.0.2.10 (예시).\n횟수: 14회.\n시간 범위: 합성 기준 10분.\n현재 보호 상태: 인증 실패로 차단.\n지금 할 일: 증가 여부 모니터링.\nPASS/FAIL: PASS",
+      "required_markers": [
+        "구분:",
+        "IP:",
+        "횟수:",
+        "시간 범위:",
+        "현재 보호 상태:",
+        "지금 할 일:",
+        "PASS/FAIL: PASS"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+name: token-safety-ci
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: python -m pip install --disable-pip-version-check tiktoken==0.13.0
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Passing benchmark fixtures
+        run: |
+          python scripts/token_ab_benchmark.py benchmarks/internal-report-ab.json --encoding o200k_base --output /tmp/token-ab.json
+          python scripts/token_ab_benchmark.py benchmarks/rtk-v0.43.0-tool-output.json --encoding o200k_base --output /tmp/rtk.json
+          python scripts/token_visible_benchmark.py benchmarks/toon-v2.3.1-uniform-visible.json --encoding o200k_base --output /tmp/toon-uniform.json
+      - name: Expected-fail safety fixtures
+        run: |
+          set +e
+          python scripts/token_visible_benchmark.py benchmarks/toon-v2.3.1-nested-guard-visible.json --encoding o200k_base --output /tmp/toon-nested.json
+          nested_exit=$?
+          python scripts/token_visible_benchmark.py benchmarks/headroom-v0.32.0-lossless-visible.json --encoding o200k_base --output /tmp/headroom.json
+          headroom_exit=$?
+          set -e
+
+          if [ "$nested_exit" -ne 1 ]; then
+            echo "Nested TOON expected exit 1, got $nested_exit"
+            exit 1
+          fi
+          if [ "$headroom_exit" -ne 1 ]; then
+            echo "Headroom expected exit 1, got $headroom_exit"
+            exit 1
+          fi
