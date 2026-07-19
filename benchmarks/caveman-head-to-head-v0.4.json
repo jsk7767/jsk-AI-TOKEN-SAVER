@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "model": "claude-fable-5",
+  "trials": 3,
+  "minimum_success_rate": 1.0,
+  "minimum_task_wins": 2,
+  "max_budget_usd": 0.3,
+  "timeout_seconds": 180,
+  "tools": ["Read", "Grep", "Glob"],
+  "arms": {
+    "baseline": {
+      "prompt": ""
+    },
+    "caveman": {
+      "source": {
+        "url": "https://raw.githubusercontent.com/JuliusBrussee/caveman/0d95a81d35a9f2d123a5e9430d1cfc43d55f1bb0/src/rules/caveman-activate.md",
+        "sha256": "e034310029476ea922953287ec8edad0a1ea76db7c5fc865d5ca2b5ecc33e9f3"
+      }
+    },
+    "jsk": {
+      "source": {
+        "path": ".agents/skills/jsk-ai-token-saver/SKILL.md",
+        "strip_frontmatter": true
+      }
+    },
+    "hybrid": {
+      "sources": [
+        {
+          "path": ".agents/skills/jsk-ai-token-saver/SKILL.md",
+          "strip_frontmatter": true
+        },
+        {
+          "url": "https://raw.githubusercontent.com/JuliusBrussee/caveman/0d95a81d35a9f2d123a5e9430d1cfc43d55f1bb0/src/rules/caveman-activate.md",
+          "sha256": "e034310029476ea922953287ec8edad0a1ea76db7c5fc865d5ca2b5ecc33e9f3"
+        }
+      ]
+    }
+  },
+  "tasks": [
+    {
+      "id": "repeat-read-accounting",
+      "prompt": "Inspect this repository. Locate the implementation that counts repeated tool or file reads in the visible-trace evaluator. Report only: repository-relative POSIX source path, exact field name that marks a repeat, and exact accumulator receiving those tokens. Do not guess.",
+      "required_markers": [
+        "scripts/token_visible_benchmark.py",
+        "repeat_of",
+        "repeat_read_tokens"
+      ],
+      "minimum_tool_calls": 1
+    },
+    {
+      "id": "kernel-token-budget",
+      "prompt": "Inspect this repository. Locate the integration test enforcing the active token-saving kernel size. Report only: repository-relative POSIX test path, tokenizer encoding name, body-token limit, and full-file-token limit. Do not guess.",
+      "required_markers": [
+        "tests/test_agent_integrations.py",
+        "o200k_base",
+        "160",
+        "300"
+      ],
+      "minimum_tool_calls": 1
+    },
+    {
+      "id": "expected-fail-ci-guard",
+      "prompt": "Inspect this repository. Find the CI expected-fail guard for the unsafe nested TOON fixture. Report only: repository-relative POSIX workflow path, exact fixture filename, and expected exit result. Do not guess.",
+      "required_markers": [
+        ".github/workflows/ci.yml",
+        "toon-v2.3.1-nested-guard-visible.json",
+        "exit code 1"
+      ],
+      "minimum_tool_calls": 1
+    }
+  ]
+}

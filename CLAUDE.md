@@ -12,6 +12,8 @@ Claude Code discovers the project skill at:
 
 For repository, research, long-session, multi-agent, repeated tool/file, or token-saving work, invoke `/jsk-ai-token-saver` and apply its active saving loop before any measurement. Its canonical cross-agent package is `.agents/skills/jsk-ai-token-saver/SKILL.md`.
 
+Optional runtime: `claude --plugin-dir .` loads the compact SessionStart kernel, per-turn reminder, and bounded agents without changing user settings.
+
 ## Active saving rules
 
 - Reuse verified current context, then use project pointers, targeted search, and exact line slices.
@@ -36,6 +38,7 @@ uv sync
 uv run python -m unittest discover -s tests -v
 uv run python scripts/token_ab_benchmark.py benchmarks/internal-report-ab.json --encoding o200k_base
 uv run python scripts/token_visible_benchmark.py benchmarks/toon-v2.3.1-uniform-visible.json --encoding o200k_base
+uv run python scripts/head_to_head_benchmark.py benchmarks/caveman-head-to-head-v0.4.json --output reports/caveman-head-to-head-v0.4.json --dry-run
 
 # expected-fail exit 1
 set +e

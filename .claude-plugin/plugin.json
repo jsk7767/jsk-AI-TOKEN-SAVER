@@ -1,0 +1,35 @@
+{
+  "name": "jsk-ai-token-saver",
+  "version": "0.4.0",
+  "description": "Reduce total agent context, tool, handoff, and output tokens per correct task.",
+  "author": {
+    "name": "jsk7767",
+    "url": "https://github.com/jsk7767"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/src/hooks/jsk-save-activate.js\"",
+            "timeout": 5,
+            "statusMessage": "Loading JSK token-saving kernel..."
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PLUGIN_ROOT}/src/hooks/jsk-save-reinforce.js\"",
+            "timeout": 5,
+            "statusMessage": "Reinforcing bounded context and tools..."
+          }
+        ]
+      }
+    ]
+  }
+}

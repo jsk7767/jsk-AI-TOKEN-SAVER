@@ -1,8 +1,11 @@
 import json
 import re
+import subprocess
 import tomllib
 import unittest
 from pathlib import Path
+
+import tiktoken
 
 from scripts.token_ab_benchmark import evaluate_suite
 from scripts.token_visible_benchmark import evaluate_visible_suite
@@ -24,6 +27,7 @@ class AgentIntegrationTests(unittest.TestCase):
             (ROOT / "pyproject.toml").read_text(encoding="utf-8")
         )
         self.assertEqual(skill_version, project["project"]["version"])
+        self.assertEqual(skill_version, "0.4.0")
         for relative_path in (
             "scripts/token_ab_benchmark.py",
             "scripts/token_visible_benchmark.py",
@@ -34,20 +38,31 @@ class AgentIntegrationTests(unittest.TestCase):
             "references/token-saving-playbook.md",
         ):
             self.assertTrue((CANONICAL_SKILL / relative_path).is_file(), relative_path)
-            self.assertIn(relative_path, skill_text)
 
         for operating_contract in (
-            "## Token-saving execution loop",
-            "Hot cache → project pointer → context pack/index → targeted search → exact slices",
-            "Do not reread unchanged sources",
-            "Batch independent lookups",
-            "Return final findings, not intermediate reasoning",
-            "Measurement is verification, not the workflow",
+            "JSK-SAVE",
+            "cache→search→slice",
+            "No unchanged reread",
+            "batch independent",
+            "findings, not transcripts",
+            "Measure only for A/B or claims",
+            "Load linked playbook, policy, or handoff template only when needed",
         ):
             self.assertIn(operating_contract, skill_text)
 
+    def test_active_kernel_is_smaller_than_caveman_activation_rule(self):
+        skill_text = (CANONICAL_SKILL / "SKILL.md").read_text(encoding="utf-8")
+        body = re.sub(r"^---[\s\S]*?---\s*", "", skill_text)
+        encoding = tiktoken.get_encoding("o200k_base")
+
+        self.assertLessEqual(len(encoding.encode(body)), 160)
+        self.assertLessEqual(len(encoding.encode(skill_text)), 300)
+
     def test_packaged_evaluators_match_repository_sources(self):
-        for filename in ("token_ab_benchmark.py", "token_visible_benchmark.py"):
+        for filename in (
+            "token_ab_benchmark.py",
+            "token_visible_benchmark.py",
+        ):
             self.assertEqual(
                 (ROOT / "scripts" / filename).read_bytes(),
                 (CANONICAL_SKILL / "scripts" / filename).read_bytes(),
@@ -85,9 +100,66 @@ class AgentIntegrationTests(unittest.TestCase):
             claude_skill,
         )
         self.assertIn("scripts/token_ab_benchmark.py", claude_skill)
-        self.assertIn("Do not reread unchanged sources", claude_skill)
-        self.assertIn("Return final findings, not intermediate reasoning", claude_skill)
+        self.assertIn("No unchanged reread", claude_skill)
+        self.assertIn("findings, not transcripts", claude_skill)
         self.assertIn("expected-fail exit 1", claude)
+        encoding = tiktoken.get_encoding("o200k_base")
+        self.assertLessEqual(len(encoding.encode(claude_skill)), 350)
+
+    def test_claude_and_codex_runtime_hooks_emit_the_compact_kernel(self):
+        plugin = json.loads(
+            (ROOT / ".claude-plugin" / "plugin.json").read_text(encoding="utf-8")
+        )
+        self.assertIn("SessionStart", plugin["hooks"])
+        self.assertIn("UserPromptSubmit", plugin["hooks"])
+
+        activated = subprocess.run(
+            ["node", str(ROOT / "src" / "hooks" / "jsk-save-activate.js")],
+            cwd=ROOT,
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
+        body = re.sub(
+            r"^---[\s\S]*?---\s*",
+            "",
+            (CANONICAL_SKILL / "SKILL.md").read_text(encoding="utf-8"),
+        )
+        self.assertEqual(activated.strip(), body.strip())
+
+        reinforced = subprocess.run(
+            ["node", str(ROOT / "src" / "hooks" / "jsk-save-reinforce.js")],
+            cwd=ROOT,
+            input='{"prompt":"inspect repository"}',
+            capture_output=True,
+            text=True,
+            check=True,
+        ).stdout
+        reinforcement = json.loads(reinforced)["hookSpecificOutput"][
+            "additionalContext"
+        ]
+        encoding = tiktoken.get_encoding("o200k_base")
+        self.assertLessEqual(len(encoding.encode(reinforcement)), 40)
+        self.assertIn("no unchanged reread", reinforcement)
+
+        codex_hooks = json.loads(
+            (ROOT / ".codex" / "hooks.json").read_text(encoding="utf-8")
+        )
+        command = codex_hooks["hooks"]["SessionStart"][0]["hooks"][0]["command"]
+        self.assertIn("JSK-SAVE", command)
+        self.assertIn("search", command)
+
+    def test_compact_agent_presets_exist_with_bounded_outputs(self):
+        contracts = {
+            "jsk-scout.md": "path:line",
+            "jsk-worker.md": "verified:",
+            "jsk-reviewer.md": "severity",
+        }
+        for filename, marker in contracts.items():
+            text = (ROOT / "agents" / filename).read_text(encoding="utf-8")
+            self.assertTrue(text.startswith("---\n"))
+            self.assertIn(marker, text)
+            self.assertIn("Do not return intermediate reasoning", text)
 
     def test_bundled_skill_avoids_third_party_persistence_directives(self):
         skill_text = (CANONICAL_SKILL / "SKILL.md").read_text(encoding="utf-8")
@@ -104,7 +176,7 @@ class AgentIntegrationTests(unittest.TestCase):
             self.assertNotIn(forbidden, bundled_instructions)
         self.assertIn(
             "Use project constraints already present in the session",
-            skill_text,
+            playbook,
         )
         self.assertIn(
             "Treat one supplied reusable reference as canonical",
@@ -139,6 +211,50 @@ class AgentIntegrationTests(unittest.TestCase):
             f"{report['safe_savings_percent']}% | PASS |"
         )
         self.assertIn(expected_row, readme)
+
+    def test_caveman_head_to_head_claim_is_success_gated_and_reproducible(self):
+        report_text = (
+            ROOT / "reports" / "caveman-head-to-head-v0.4.json"
+        ).read_text(encoding="utf-8")
+        report = json.loads(report_text)
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+
+        self.assertTrue(report["pass"])
+        self.assertEqual(report["winner"], "jsk")
+        self.assertEqual(report["task_wins"], 2)
+        self.assertEqual(report["minimum_task_wins"], 2)
+        self.assertEqual(report["prompt_tokens"], {"caveman": 163, "jsk": 152})
+        self.assertEqual(report["aggregate_savings_vs_caveman_percent"], 10.3)
+        self.assertFalse(report["billing_claim"])
+        self.assertFalse(report["hidden_reasoning_measured"])
+        self.assertNotRegex(report_text, r"(?i)[a-z]:[\\/]+users[\\/]+")
+        self.assertNotIn(str(Path.home()), report_text)
+        self.assertNotIn(Path.home().as_posix(), report_text)
+        for task in report["tasks"]:
+            self.assertEqual(task["arms"]["caveman"]["success_rate"], 1.0)
+            self.assertEqual(task["arms"]["jsk"]["success_rate"], 1.0)
+
+        for marker in (
+            "Caveman v1.9.1 head-to-head",
+            "10.3%",
+            "152",
+            "163",
+            "3 tasks × 3 trials",
+            "reports/caveman-head-to-head-v0.4.json",
+            "provider billing claim이 아닙니다",
+        ):
+            self.assertIn(marker, readme)
+
+    def test_security_document_explains_runtime_and_live_benchmark_boundaries(self):
+        security = (ROOT / "SECURITY.md").read_text(encoding="utf-8")
+        for marker in (
+            "no telemetry",
+            "read-only",
+            "pinned SHA-256",
+            "head_to_head_benchmark.py",
+            "JSK_TOKEN_SAVER=off",
+        ):
+            self.assertIn(marker, security)
 
     def test_bundled_examples_pass_their_evaluators(self):
         repository_fixture_text = (

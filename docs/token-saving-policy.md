@@ -91,7 +91,20 @@ Each task defines:
 
 Only successful runs contribute to token distributions. A candidate fails if its success rate regresses or its successful median is not more token-efficient.
 
-## 7. Expected-fail fixtures
+## 7. Live head-to-head contract
+
+The repository-only `head_to_head_benchmark.py` compares real Claude Code runs under the same model, workspace, task prompt, tools, effort, permission mode, and run count.
+
+- competitor instructions come from a commit-pinned URL and must match a pinned SHA-256
+- every task requires non-empty correctness markers and a minimum Tool-call count
+- both Caveman and jsk must meet the configured success rate; shorter failed runs never count
+- the processed-token metric is the provider-reported sum of input, cache-creation input, cache-read input, and output tokens
+- jsk must have a smaller active prompt, meet the integer minimum task-win count, and have a lower aggregate of successful task medians
+- reports keep `billing_claim: false` and `hidden_reasoning_measured: false`
+
+This metric is distinct from V1/V2 visible-fixture counts. Do not add or average percentages across those surfaces.
+
+## 8. Expected-fail fixtures
 
 An expected-fail fixture validates that the evaluator rejects an unsafe or inefficient candidate.
 
@@ -100,7 +113,7 @@ An expected-fail fixture validates that the evaluator rejects an unsafe or ineff
 
 CI must distinguish these exits. Any unexpected pass or runtime error fails CI.
 
-## 8. Public-data rules
+## 9. Public-data rules
 
 Public fixtures must use synthetic or anonymized data only.
 
@@ -113,7 +126,7 @@ Do not include:
 
 Use documentation-only IP ranges such as `192.0.2.0/24` for security examples.
 
-## 9. Reproduction commands
+## 10. Reproduction commands
 
 ```bash
 uv sync

@@ -7,6 +7,7 @@
 
 Codex는 저장소의 `.agents/skills/jsk-ai-token-saver/SKILL.md`를 자동 발견한다.
 저장소·리서치·장기 작업·멀티에이전트·반복 tool/file 작업 또는 토큰 절감 요청에서는 `$jsk-ai-token-saver`를 먼저 로드하고 실제 절약 루프를 적용한다.
+Codex에서 이 저장소를 trusted project로 승인한 경우 `.codex/hooks.json`이 세션 시작 시 경량 JSK-SAVE reminder를 주입한다.
 
 ## 실제 절약 규칙
 
@@ -31,6 +32,7 @@ uv run python -m unittest discover -s tests -v
 uv run python scripts/token_ab_benchmark.py benchmarks/internal-report-ab.json --encoding o200k_base
 uv run python scripts/token_ab_benchmark.py benchmarks/rtk-v0.43.0-tool-output.json --encoding o200k_base
 uv run python scripts/token_visible_benchmark.py benchmarks/toon-v2.3.1-uniform-visible.json --encoding o200k_base
+uv run python scripts/head_to_head_benchmark.py benchmarks/caveman-head-to-head-v0.4.json --output reports/caveman-head-to-head-v0.4.json --dry-run
 ```
 
 `headroom-v0.32.0-lossless-visible.json`과 `toon-v2.3.1-nested-guard-visible.json`은 evaluator가 위험 후보를 차단하는지 보는 expected-fail fixture다.

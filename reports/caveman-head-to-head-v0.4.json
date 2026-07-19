@@ -1,0 +1,1251 @@
+{
+  "schema_version": 1,
+  "metric": "provider_reported_processed_tokens_per_correct_task",
+  "billing_claim": false,
+  "hidden_reasoning_measured": false,
+  "provider_usage_measured": true,
+  "runs_required": 3,
+  "minimum_success_rate": 1.0,
+  "minimum_task_win_rate": 0.67,
+  "minimum_task_wins": 2,
+  "prompt_tokens": {
+    "caveman": 163,
+    "jsk": 152
+  },
+  "task_wins": 2,
+  "task_win_rate": 0.6666666666666666,
+  "aggregate_savings_vs_caveman_percent": 10.3,
+  "tasks": [
+    {
+      "id": "repeat-read-accounting",
+      "required_markers": [
+        "scripts/token_visible_benchmark.py",
+        "repeat_of",
+        "repeat_read_tokens"
+      ],
+      "arms": {
+        "caveman": {
+          "n_runs": 3,
+          "n_success": 3,
+          "success_rate": 1.0,
+          "provider_total_tokens_median": 26943.0,
+          "tool_output_visible_tokens_median": 704.0,
+          "repeated_tool_calls_total": 0,
+          "runs": [
+            {
+              "provider_total_tokens": 26943,
+              "usage": {
+                "input_tokens": 6,
+                "cache_creation_input_tokens": 6854,
+                "cache_read_input_tokens": 19575,
+                "output_tokens": 508
+              },
+              "tool_calls": 2,
+              "tool_trace": [
+                {
+                  "id": "toolu_018fEmfxzjcAm9HELoHGPnxq",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "repeat",
+                    "-i": true,
+                    "path": ".",
+                    "output_mode": "files_with_matches"
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01Cipcmtzo5ES3NnvJT57vmA",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "repeat",
+                    "-i": true,
+                    "path": "./scripts\\token_visible_benchmark.py",
+                    "output_mode": "content",
+                    "-C": 5
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 704,
+              "final_text": "Found.\n\n- Path: `scripts/token_visible_benchmark.py` (duplicate copy also at `.agents/skills/jsk-ai-token-saver/scripts/token_visible_benchmark.py`)\n- Repeat marker field: `repeat_of` (checked `message.get(\"repeat_of\") is not None`, line 58)\n- Accumulator: `repeat_read_tokens` (line 45, incremented line 59)",
+              "num_turns": 3,
+              "duration_ms": 8952,
+              "total_cost_usd": 0.18277700000000002,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            },
+            {
+              "provider_total_tokens": 26738,
+              "usage": {
+                "input_tokens": 6,
+                "cache_creation_input_tokens": 3508,
+                "cache_read_input_tokens": 22754,
+                "output_tokens": 470
+              },
+              "tool_calls": 2,
+              "tool_trace": [
+                {
+                  "id": "toolu_01YUkXmmkmbYVX3tt1cVSvpH",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "repeat",
+                    "path": ".",
+                    "output_mode": "files_with_matches",
+                    "-i": true
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01TJoBms8UoPuurrp6RF8M8E",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "repeat",
+                    "path": "./scripts\\token_visible_benchmark.py",
+                    "output_mode": "content",
+                    "-i": true,
+                    "-C": 4
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 614,
+              "final_text": "Found.\n\n- Path: `scripts/token_visible_benchmark.py` (same code also copied at `.agents/skills/jsk-ai-token-saver/scripts/token_visible_benchmark.py`)\n- Repeat marker field: `repeat_of` (checked `is not None` at line 58)\n- Accumulator: `repeat_read_tokens` (line 59)",
+              "num_turns": 3,
+              "duration_ms": 17486,
+              "total_cost_usd": 0.117141,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            },
+            {
+              "provider_total_tokens": 27262,
+              "usage": {
+                "input_tokens": 6,
+                "cache_creation_input_tokens": 4094,
+                "cache_read_input_tokens": 22414,
+                "output_tokens": 748
+              },
+              "tool_calls": 2,
+              "tool_trace": [
+                {
+                  "id": "toolu_016e4fSvT3o7w8DbBGmDnHQq",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "repeat",
+                    "path": "./src",
+                    "output_mode": "content",
+                    "-n": true,
+                    "-i": true
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01TbgujtVzJFTgToUcU3DGh5",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "repeat|redundant|duplicate",
+                    "path": ".",
+                    "output_mode": "content",
+                    "-n": true,
+                    "-i": true,
+                    "glob": "*.py",
+                    "head_limit": 60
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 865,
+              "final_text": "Found it. Answer:\n\n- Path: `scripts/token_visible_benchmark.py` (duplicate copy at `.agents/skills/jsk-ai-token-saver/scripts/token_visible_benchmark.py`)\n- Repeat marker field: `repeat_of` (checked at `scripts/token_visible_benchmark.py:58` — `message.get(\"repeat_of\") is not None`)\n- Accumulator: `repeat_read_tokens` (`repeat_read_tokens += tokens`, line 59)\n\nRead-only question. No plan needed.",
+              "num_turns": 3,
+              "duration_ms": 14681,
+              "total_cost_usd": 0.14241600000000001,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            }
+          ]
+        },
+        "jsk": {
+          "n_runs": 3,
+          "n_success": 3,
+          "success_rate": 1.0,
+          "provider_total_tokens_median": 26743.0,
+          "tool_output_visible_tokens_median": 614.0,
+          "repeated_tool_calls_total": 0,
+          "runs": [
+            {
+              "provider_total_tokens": 26294,
+              "usage": {
+                "input_tokens": 6,
+                "cache_creation_input_tokens": 6478,
+                "cache_read_input_tokens": 19319,
+                "output_tokens": 491
+              },
+              "tool_calls": 2,
+              "tool_trace": [
+                {
+                  "id": "toolu_01EbFi68FLfrXEi5sum9hE5G",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "repeat|reread|re_read|duplicate",
+                    "path": ".",
+                    "glob": "*.py",
+                    "output_mode": "files_with_matches",
+                    "-i": true
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_011xdSAEwfZpoDwGbWVJ3ieg",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "repeat|reread|duplicate",
+                    "path": "./scripts\\token_visible_benchmark.py",
+                    "output_mode": "content",
+                    "-i": true,
+                    "-C": 4
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 458,
+              "final_text": "- Path: `scripts/token_visible_benchmark.py`\n- Repeat marker field: `repeat_of` (counted when `message.get(\"repeat_of\") is not None`, line 58)\n- Accumulator: `repeat_read_tokens` (line 45, incremented line 59)",
+              "num_turns": 3,
+              "duration_ms": 11256,
+              "total_cost_usd": 0.174156,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            },
+            {
+              "provider_total_tokens": 36840,
+              "usage": {
+                "input_tokens": 8,
+                "cache_creation_input_tokens": 3859,
+                "cache_read_input_tokens": 32223,
+                "output_tokens": 750
+              },
+              "tool_calls": 3,
+              "tool_trace": [
+                {
+                  "id": "toolu_01Lf3rLUmVxBMiZdtBiMAJka",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "repeat",
+                    "path": ".",
+                    "output_mode": "files_with_matches",
+                    "-i": true
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_018mgyNonWwCPaPVSVyu7GLB",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "repeat",
+                    "path": "./scripts\\token_visible_benchmark.py",
+                    "output_mode": "content",
+                    "-i": true,
+                    "-C": 4
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01GXGsXvs8xpufpMiieExvBm",
+                  "name": "ExitPlanMode",
+                  "input": {
+                    "plan": "Read-only inspection task — no changes needed. Findings: the visible-trace evaluator is `scripts/token_visible_benchmark.py`; repeats are marked by the `repeat_of` field and their tokens accumulate into `repeat_read_tokens`."
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 653,
+              "final_text": "The answer to the inspection (read-only, no plan needed):\n\n- **Path:** `scripts/token_visible_benchmark.py`\n- **Repeat marker field:** `repeat_of` — a message counts as a repeat when `message.get(\"repeat_of\") is not None` (`scripts/token_visible_benchmark.py:58`)\n- **Accumulator:** `repeat_read_tokens` (`scripts/token_visible_benchmark.py:45,59`)",
+              "num_turns": 4,
+              "duration_ms": 12932,
+              "total_cost_usd": 0.14765,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            },
+            {
+              "provider_total_tokens": 26743,
+              "usage": {
+                "input_tokens": 6,
+                "cache_creation_input_tokens": 3510,
+                "cache_read_input_tokens": 22711,
+                "output_tokens": 516
+              },
+              "tool_calls": 2,
+              "tool_trace": [
+                {
+                  "id": "toolu_01MVh3NbrRT4nXJGo8Bupr7j",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "repeat",
+                    "path": ".",
+                    "-i": true,
+                    "output_mode": "files_with_matches"
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01EGM46s3myCrsR9tZNa7QyB",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "repeat",
+                    "path": "./scripts\\token_visible_benchmark.py",
+                    "-i": true,
+                    "output_mode": "content",
+                    "-C": 4
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 614,
+              "final_text": "- Path: `scripts/token_visible_benchmark.py`\n- Repeat marker field: `repeat_of` (a message counts as a repeat when `message.get(\"repeat_of\") is not None`, line 58)\n- Accumulator: `repeat_read_tokens` (line 59)\n\nNote the same file also exists at `.agents/skills/jsk-ai-token-saver/scripts/token_visible_benchmark.py` as a bundled copy; the canonical source is the `scripts/` one.",
+              "num_turns": 3,
+              "duration_ms": 9839,
+              "total_cost_usd": 0.119438,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            }
+          ]
+        }
+      },
+      "jsk_savings_vs_caveman_percent": 0.74,
+      "jsk_won": true,
+      "failure_reasons": [],
+      "pass": true
+    },
+    {
+      "id": "kernel-token-budget",
+      "required_markers": [
+        "tests/test_agent_integrations.py",
+        "o200k_base",
+        "160",
+        "300"
+      ],
+      "arms": {
+        "caveman": {
+          "n_runs": 3,
+          "n_success": 3,
+          "success_rate": 1.0,
+          "provider_total_tokens_median": 26471.0,
+          "tool_output_visible_tokens_median": 574.0,
+          "repeated_tool_calls_total": 0,
+          "runs": [
+            {
+              "provider_total_tokens": 17635,
+              "usage": {
+                "input_tokens": 4,
+                "cache_creation_input_tokens": 3132,
+                "cache_read_input_tokens": 14082,
+                "output_tokens": 417
+              },
+              "tool_calls": 1,
+              "tool_trace": [
+                {
+                  "id": "toolu_0188d1fTbVS3Xqex993k5uYv",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "kernel|encoding|tiktoken",
+                    "path": "./tests\\test_agent_integrations.py",
+                    "output_mode": "content",
+                    "-n": true
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 525,
+              "final_text": "Found test. Answer:\n\n- Path: `tests/test_agent_integrations.py` (test `test_active_kernel_is_smaller_than_caveman_activation_rule`, line 53)\n- Encoding: `o200k_base` (tiktoken)\n- Body-token limit: 160\n- Full-file limit: 300\n\nNo plan needed — read-only inspection, done.",
+              "num_turns": 2,
+              "duration_ms": 8127,
+              "total_cost_usd": 0.098272,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            },
+            {
+              "provider_total_tokens": 26471,
+              "usage": {
+                "input_tokens": 6,
+                "cache_creation_input_tokens": 3463,
+                "cache_read_input_tokens": 22595,
+                "output_tokens": 407
+              },
+              "tool_calls": 2,
+              "tool_trace": [
+                {
+                  "id": "toolu_015jwgr5Xi3xYwfxx9PG6veY",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "kernel|encoding_for|get_encoding",
+                    "path": "./tests",
+                    "output_mode": "content",
+                    "-n": true
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01KTbk9kLztTGqhA62KZ1M2g",
+                  "name": "Read",
+                  "input": {
+                    "file_path": "./tests\\test_agent_integrations.py",
+                    "offset": 45,
+                    "limit": 40
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 574,
+              "final_text": "Found.\n\n- Path: `tests/test_agent_integrations.py` (test `test_active_kernel_is_smaller_than_caveman_activation_rule`)\n- Encoding: `o200k_base`\n- Body limit: 160 tokens\n- Full-file limit: 300 tokens",
+              "num_turns": 3,
+              "duration_ms": 10285,
+              "total_cost_usd": 0.11292,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            },
+            {
+              "provider_total_tokens": 27112,
+              "usage": {
+                "input_tokens": 6,
+                "cache_creation_input_tokens": 4297,
+                "cache_read_input_tokens": 22365,
+                "output_tokens": 444
+              },
+              "tool_calls": 2,
+              "tool_trace": [
+                {
+                  "id": "toolu_01TJpCZtbhELvDHTWYidjkds",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "kernel",
+                    "path": "./tests",
+                    "output_mode": "files_with_matches"
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01R6qTZKoBC6DdhtPce8GLev",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "token|encoding|kernel",
+                    "path": "./tests\\test_agent_integrations.py",
+                    "output_mode": "content",
+                    "-n": true,
+                    "-i": true
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 1092,
+              "final_text": "Found.\n\n- Path: `tests/test_agent_integrations.py` (test `test_active_kernel_is_smaller_than_caveman_activation_rule`, line 53)\n- Tokenizer encoding: `o200k_base` (tiktoken)\n- Body-token limit: 160\n- Full-file-token limit: 300",
+              "num_turns": 3,
+              "duration_ms": 9462,
+              "total_cost_usd": 0.13122499999999998,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            }
+          ]
+        },
+        "jsk": {
+          "n_runs": 3,
+          "n_success": 3,
+          "success_rate": 1.0,
+          "provider_total_tokens_median": 27055.0,
+          "tool_output_visible_tokens_median": 1092.0,
+          "repeated_tool_calls_total": 0,
+          "runs": [
+            {
+              "provider_total_tokens": 29015,
+              "usage": {
+                "input_tokens": 6,
+                "cache_creation_input_tokens": 4490,
+                "cache_read_input_tokens": 24059,
+                "output_tokens": 460
+              },
+              "tool_calls": 2,
+              "tool_trace": [
+                {
+                  "id": "toolu_016H1w3LsjCtsmAbEFvAh81q",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "encoding|get_encoding|token",
+                    "path": "./tests/test_agent_integrations.py",
+                    "output_mode": "content",
+                    "-i": true
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01YSmWsKLN7fgVcqkPw2FJu7",
+                  "name": "Read",
+                  "input": {
+                    "file_path": "./tests/test_agent_integrations.py",
+                    "offset": 50,
+                    "limit": 12
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 1190,
+              "final_text": "- Test path: `tests/test_agent_integrations.py` (`test_active_kernel_is_smaller_than_caveman_activation_rule`, line 53)\n- Tokenizer encoding: `o200k_base`\n- Body-token limit: 160\n- Full-file-token limit: 300",
+              "num_turns": 3,
+              "duration_ms": 10531,
+              "total_cost_usd": 0.137579,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            },
+            {
+              "provider_total_tokens": 27024,
+              "usage": {
+                "input_tokens": 6,
+                "cache_creation_input_tokens": 4277,
+                "cache_read_input_tokens": 22316,
+                "output_tokens": 425
+              },
+              "tool_calls": 2,
+              "tool_trace": [
+                {
+                  "id": "toolu_01GK9YGAndq5Va7Zf2n4PuWi",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "kernel",
+                    "path": "./tests",
+                    "output_mode": "files_with_matches"
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_013nD69GnNTU75Mro7kE8pua",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "encoding|token|kernel",
+                    "path": "./tests\\test_agent_integrations.py",
+                    "output_mode": "content",
+                    "-i": true
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 1092,
+              "final_text": "- Test path: `tests/test_agent_integrations.py` (test `test_active_kernel_is_smaller_than_caveman_activation_rule`, tests/test_agent_integrations.py:53)\n- Tokenizer encoding: `o200k_base`\n- Body-token limit: 160\n- Full-file-token limit: 300",
+              "num_turns": 3,
+              "duration_ms": 8612,
+              "total_cost_usd": 0.12982100000000002,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            },
+            {
+              "provider_total_tokens": 27055,
+              "usage": {
+                "input_tokens": 6,
+                "cache_creation_input_tokens": 4294,
+                "cache_read_input_tokens": 22316,
+                "output_tokens": 439
+              },
+              "tool_calls": 2,
+              "tool_trace": [
+                {
+                  "id": "toolu_01FWCwPeokhAa222R4ERwtiw",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "kernel",
+                    "path": "./tests",
+                    "output_mode": "files_with_matches"
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01FwcLfMje1cKuG9QhD2Mt5J",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "kernel|encoding|token",
+                    "path": "./tests\\test_agent_integrations.py",
+                    "output_mode": "content",
+                    "-i": true,
+                    "-n": true
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 1092,
+              "final_text": "- Test path: `tests/test_agent_integrations.py` (test `test_active_kernel_is_smaller_than_caveman_activation_rule`, lines 53–59)\n- Tokenizer encoding: `o200k_base` (tiktoken)\n- Body-token limit: 160\n- Full-file-token limit: 300",
+              "num_turns": 3,
+              "duration_ms": 8782,
+              "total_cost_usd": 0.130861,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            }
+          ]
+        }
+      },
+      "jsk_savings_vs_caveman_percent": -2.21,
+      "jsk_won": false,
+      "failure_reasons": [],
+      "pass": true
+    },
+    {
+      "id": "expected-fail-ci-guard",
+      "required_markers": [
+        ".github/workflows/ci.yml",
+        "toon-v2.3.1-nested-guard-visible.json",
+        "exit code 1"
+      ],
+      "arms": {
+        "caveman": {
+          "n_runs": 3,
+          "n_success": 3,
+          "success_rate": 1.0,
+          "provider_total_tokens_median": 36494.0,
+          "tool_output_visible_tokens_median": 514.0,
+          "repeated_tool_calls_total": 0,
+          "runs": [
+            {
+              "provider_total_tokens": 36494,
+              "usage": {
+                "input_tokens": 8,
+                "cache_creation_input_tokens": 3713,
+                "cache_read_input_tokens": 32024,
+                "output_tokens": 749
+              },
+              "tool_calls": 4,
+              "tool_trace": [
+                {
+                  "id": "toolu_01RGuhbxhitHruygewTNSBP1",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "toon",
+                    "-i": true,
+                    "glob": "**/*.yml",
+                    "output_mode": "content",
+                    "-n": true
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01EMoVsUv6jynb1RT2Sc6ppg",
+                  "name": "Glob",
+                  "input": {
+                    "pattern": ".github/workflows/*"
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_011tRUi8n1ZYhULGgngGe91i",
+                  "name": "Read",
+                  "input": {
+                    "file_path": "./.github\\workflows\\ci.yml",
+                    "offset": 20,
+                    "limit": 25
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01XQu9xK9Vc2QWSi3pN8Xm56",
+                  "name": "ExitPlanMode",
+                  "input": {
+                    "plan": "Read-only inspection, already complete. Findings: CI expected-fail guard lives in `.github/workflows/ci.yml` (\"Expected-fail safety fixtures\" step). Fixture: `benchmarks/toon-v2.3.1-nested-guard-visible.json`. Expected exit code: 1 (step fails CI if exit != 1). No changes needed."
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 514,
+              "final_text": "Answer (no changes needed, read-only):\n\n- Workflow path: `.github/workflows/ci.yml`\n- Fixture filename: `toon-v2.3.1-nested-guard-visible.json` (in `benchmarks/`)\n- Expected result: exit code 1 — CI step fails if benchmark exits with anything else (`ci.yml:36-39`).",
+              "num_turns": 5,
+              "duration_ms": 15075,
+              "total_cost_usd": 0.14446599999999998,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            },
+            {
+              "provider_total_tokens": 26611,
+              "usage": {
+                "input_tokens": 6,
+                "cache_creation_input_tokens": 3359,
+                "cache_read_input_tokens": 22689,
+                "output_tokens": 557
+              },
+              "tool_calls": 3,
+              "tool_trace": [
+                {
+                  "id": "toolu_01A5k5dTkJUszvnnXJUNYXbs",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "toon",
+                    "-i": true,
+                    "glob": "**/*.yml",
+                    "output_mode": "content",
+                    "-n": true
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01ANx8Lno57DpGwunq9gDtcs",
+                  "name": "Glob",
+                  "input": {
+                    "pattern": ".github/workflows/*"
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01WDiuGq32fdmczgS2H8jsbs",
+                  "name": "Read",
+                  "input": {
+                    "file_path": "./.github\\workflows\\ci.yml",
+                    "offset": 20,
+                    "limit": 25
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 475,
+              "final_text": "Found it.\n\n- Workflow path: `.github/workflows/ci.yml`\n- Fixture filename: `toon-v2.3.1-nested-guard-visible.json`\n- Expected exit result: exit code `1` (step at `ci.yml:36-39` fails CI if `token_visible_benchmark.py` on that fixture returns anything else)\n\nRead-only inspection request — nothing to plan or change.",
+              "num_turns": 4,
+              "duration_ms": 14248,
+              "total_cost_usd": 0.118426,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            },
+            {
+              "provider_total_tokens": 37068,
+              "usage": {
+                "input_tokens": 8,
+                "cache_creation_input_tokens": 3931,
+                "cache_read_input_tokens": 32353,
+                "output_tokens": 776
+              },
+              "tool_calls": 4,
+              "tool_trace": [
+                {
+                  "id": "toolu_01LALyzC73hWz9hFeYhUpbsm",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "toon",
+                    "path": ".",
+                    "-i": true,
+                    "glob": "**/*.yml",
+                    "output_mode": "content"
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01JMP9izDB5EmuqcDSnJQ72U",
+                  "name": "Glob",
+                  "input": {
+                    "pattern": ".github/workflows/*",
+                    "path": "."
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01AAtj73Up4nek6yi8JVguic",
+                  "name": "Read",
+                  "input": {
+                    "file_path": "./.github\\workflows\\ci.yml"
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01TMbYXq38vLMFHsmzDwKtW2",
+                  "name": "ExitPlanMode",
+                  "input": {
+                    "plan": "Read-only inspection only — no changes. Answer: workflow `.github/workflows/ci.yml`, fixture `toon-v2.3.1-nested-guard-visible.json`, expected exit code 1."
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 642,
+              "final_text": "Answer (read-only inspection, no plan needed):\n\n- Workflow path: `.github/workflows/ci.yml`\n- Fixture: `toon-v2.3.1-nested-guard-visible.json`\n- Expected result: exit code 1 — \"Expected-fail safety fixtures\" step runs fixture, fails CI unless `$nested_exit` == 1 (`.github/workflows/ci.yml:30-39`).",
+              "num_turns": 5,
+              "duration_ms": 14581,
+              "total_cost_usd": 0.15049500000000002,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            }
+          ]
+        },
+        "jsk": {
+          "n_runs": 3,
+          "n_success": 3,
+          "success_rate": 1.0,
+          "provider_total_tokens_median": 26848.0,
+          "tool_output_visible_tokens_median": 475.0,
+          "repeated_tool_calls_total": 0,
+          "runs": [
+            {
+              "provider_total_tokens": 26147,
+              "usage": {
+                "input_tokens": 6,
+                "cache_creation_input_tokens": 3224,
+                "cache_read_input_tokens": 22513,
+                "output_tokens": 404
+              },
+              "tool_calls": 2,
+              "tool_trace": [
+                {
+                  "id": "toolu_01EhdeqKf5gbr4XofDEHCFgt",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "toon",
+                    "glob": ".github/workflows/*",
+                    "-i": true,
+                    "output_mode": "content",
+                    "-n": true
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_016RYUkr1P58aKFmvCDqKMXW",
+                  "name": "Read",
+                  "input": {
+                    "file_path": "./.github\\workflows\\ci.yml",
+                    "offset": 20,
+                    "limit": 25
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 468,
+              "final_text": "- Workflow path: `.github/workflows/ci.yml`\n- Fixture filename: `toon-v2.3.1-nested-guard-visible.json`\n- Expected exit result: exit code 1 (the \"Expected-fail safety fixtures\" step fails CI if it isn't exactly 1)",
+              "num_turns": 3,
+              "duration_ms": 12746,
+              "total_cost_usd": 0.107905,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            },
+            {
+              "provider_total_tokens": 26848,
+              "usage": {
+                "input_tokens": 6,
+                "cache_creation_input_tokens": 3454,
+                "cache_read_input_tokens": 22734,
+                "output_tokens": 654
+              },
+              "tool_calls": 3,
+              "tool_trace": [
+                {
+                  "id": "toolu_01JMxwAxP25gm3sp9XML7ovz",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "toon",
+                    "path": ".",
+                    "-i": true,
+                    "glob": "**/*.yml",
+                    "output_mode": "content",
+                    "-n": true
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_01ABBznFYxpUvPsTL3xF6XuB",
+                  "name": "Glob",
+                  "input": {
+                    "pattern": ".github/workflows/*",
+                    "path": "."
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_018nD6UjYMConDnAjCxfHsQq",
+                  "name": "Read",
+                  "input": {
+                    "file_path": "./.github\\workflows\\ci.yml",
+                    "offset": 20,
+                    "limit": 25
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 475,
+              "final_text": "- Workflow path: `.github/workflows/ci.yml`\n- Fixture filename: `toon-v2.3.1-nested-guard-visible.json`\n- Expected exit result: exit code 1 (the \"Expected-fail safety fixtures\" step fails CI if `$nested_exit` is not 1; see `.github/workflows/ci.yml:36`)",
+              "num_turns": 4,
+              "duration_ms": 11231,
+              "total_cost_usd": 0.12524100000000002,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            },
+            {
+              "provider_total_tokens": 26893,
+              "usage": {
+                "input_tokens": 6,
+                "cache_creation_input_tokens": 3569,
+                "cache_read_input_tokens": 22853,
+                "output_tokens": 465
+              },
+              "tool_calls": 3,
+              "tool_trace": [
+                {
+                  "id": "toolu_01TgREFsAj2mFrFWrQYaGaCK",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "toon",
+                    "glob": ".github/workflows/*",
+                    "output_mode": "content",
+                    "-i": true
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_019AtdLHAUiWNsanvPuPxZ4m",
+                  "name": "Grep",
+                  "input": {
+                    "pattern": "toon",
+                    "-i": true,
+                    "head_limit": 30
+                  },
+                  "repeated": false
+                },
+                {
+                  "id": "toolu_011xoG4YBozViBRUynoKJCYH",
+                  "name": "Read",
+                  "input": {
+                    "file_path": "./.github\\workflows\\ci.yml",
+                    "offset": 20,
+                    "limit": 25
+                  },
+                  "repeated": false
+                }
+              ],
+              "repeated_tool_calls": 0,
+              "tool_output_visible_tokens": 609,
+              "final_text": "- Workflow: `.github/workflows/ci.yml`\n- Fixture: `toon-v2.3.1-nested-guard-visible.json`\n- Expected result: exit code 1 (the \"Expected-fail safety fixtures\" step fails CI if it isn't exactly 1)",
+              "num_turns": 4,
+              "duration_ms": 9147,
+              "total_cost_usd": 0.118195,
+              "models": [
+                "claude-fable-5",
+                "claude-haiku-4-5-20251001"
+              ],
+              "is_error": false,
+              "error": null,
+              "malformed_lines": 0,
+              "process_exit_code": 0,
+              "success": true,
+              "missing_markers": [],
+              "present_forbidden_markers": [],
+              "minimum_tool_calls": 1
+            }
+          ]
+        }
+      },
+      "jsk_savings_vs_caveman_percent": 26.43,
+      "jsk_won": true,
+      "failure_reasons": [],
+      "pass": true
+    }
+  ],
+  "failure_reasons": [],
+  "winner": "jsk",
+  "pass": true,
+  "metadata": {
+    "generated_at": "2026-07-19T11:42:28.543565+00:00",
+    "claude_cli_version": "2.1.215 (Claude Code)",
+    "requested_model": "claude-fable-5",
+    "tools": [
+      "Read",
+      "Grep",
+      "Glob"
+    ],
+    "tokenizer": {
+      "library": "tiktoken",
+      "version": "0.13.0",
+      "encoding": "o200k_base",
+      "prompt_count_exact_for_encoding": true
+    },
+    "sources": {
+      "caveman": {
+        "origin": "https://raw.githubusercontent.com/JuliusBrussee/caveman/0d95a81d35a9f2d123a5e9430d1cfc43d55f1bb0/src/rules/caveman-activate.md",
+        "sha256": "e034310029476ea922953287ec8edad0a1ea76db7c5fc865d5ca2b5ecc33e9f3"
+      },
+      "jsk": {
+        "origin": ".agents/skills/jsk-ai-token-saver/SKILL.md",
+        "sha256": "f791fbd102a6a0afb600330d44f7d01fd9b8f46dfc127d5173b832aad87d1b04"
+      }
+    },
+    "run_order": [
+      {
+        "task": "repeat-read-accounting",
+        "trial": 1,
+        "arm": "caveman"
+      },
+      {
+        "task": "repeat-read-accounting",
+        "trial": 1,
+        "arm": "jsk"
+      },
+      {
+        "task": "repeat-read-accounting",
+        "trial": 2,
+        "arm": "jsk"
+      },
+      {
+        "task": "repeat-read-accounting",
+        "trial": 2,
+        "arm": "caveman"
+      },
+      {
+        "task": "repeat-read-accounting",
+        "trial": 3,
+        "arm": "caveman"
+      },
+      {
+        "task": "repeat-read-accounting",
+        "trial": 3,
+        "arm": "jsk"
+      },
+      {
+        "task": "kernel-token-budget",
+        "trial": 1,
+        "arm": "jsk"
+      },
+      {
+        "task": "kernel-token-budget",
+        "trial": 1,
+        "arm": "caveman"
+      },
+      {
+        "task": "kernel-token-budget",
+        "trial": 2,
+        "arm": "caveman"
+      },
+      {
+        "task": "kernel-token-budget",
+        "trial": 2,
+        "arm": "jsk"
+      },
+      {
+        "task": "kernel-token-budget",
+        "trial": 3,
+        "arm": "jsk"
+      },
+      {
+        "task": "kernel-token-budget",
+        "trial": 3,
+        "arm": "caveman"
+      },
+      {
+        "task": "expected-fail-ci-guard",
+        "trial": 1,
+        "arm": "caveman"
+      },
+      {
+        "task": "expected-fail-ci-guard",
+        "trial": 1,
+        "arm": "jsk"
+      },
+      {
+        "task": "expected-fail-ci-guard",
+        "trial": 2,
+        "arm": "jsk"
+      },
+      {
+        "task": "expected-fail-ci-guard",
+        "trial": 2,
+        "arm": "caveman"
+      },
+      {
+        "task": "expected-fail-ci-guard",
+        "trial": 3,
+        "arm": "caveman"
+      },
+      {
+        "task": "expected-fail-ci-guard",
+        "trial": 3,
+        "arm": "jsk"
+      }
+    ],
+    "comparison_scope": "same Claude Code model, repository, tools, tasks, effort, and safety controls",
+    "summary_reevaluation": {
+      "reevaluated_at": "2026-07-19T11:45:01.538216+00:00",
+      "model_calls_reused": true,
+      "raw_runs_unchanged": true,
+      "reason": "replace rounded 0.67 threshold with exact integer gate: at least 2 of 3 tasks",
+      "pre_reevaluation_report_sha256": "cc339794f2767639713f4f93e4b46e3c4f392a4dd1869f10d4ba5451990865b5"
+    },
+    "public_path_sanitized": true
+  }
+}

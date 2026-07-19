@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'JSK-SAVE: cache→search→slice; bound tools; no unchanged reread/passed rerun; findings+PASS evidence only; clear security/DB/deploy.'",
+            "timeout": 5,
+            "statusMessage": "Loading JSK token-saving kernel"
+          }
+        ]
+      }
+    ]
+  }
+}
