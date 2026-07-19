@@ -1,7 +1,7 @@
 [project]
 name = "jsk-ai-token-saver"
-version = "0.2.0"
-description = "Safety-first visible-token benchmark toolkit for AI agent workflows"
+version = "0.3.0"
+description = "Active token-saving skill with safety-first verification for AI agents"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

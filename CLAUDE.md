@@ -10,7 +10,16 @@ Claude Code discovers the project skill at:
 
 `.claude/skills/jsk-ai-token-saver/SKILL.md`
 
-For token optimization, report compression, trace measurement, or context-headroom work, invoke `/jsk-ai-token-saver` or load that skill before changing fixtures or evaluators. Its canonical cross-agent package is `.agents/skills/jsk-ai-token-saver/SKILL.md`.
+For repository, research, long-session, multi-agent, repeated tool/file, or token-saving work, invoke `/jsk-ai-token-saver` and apply its active saving loop before any measurement. Its canonical cross-agent package is `.agents/skills/jsk-ai-token-saver/SKILL.md`.
+
+## Active saving rules
+
+- Reuse verified current context, then use project pointers, targeted search, and exact line slices.
+- Do not reread unchanged files or repeat successful expensive checks without a changed boundary.
+- Batch independent lookups; request bounded logs and decisive errors only.
+- Subagents return final evidence, paths, verification, risk, and verdict—not intermediate reasoning.
+- Evaluators are used only to verify a policy change, A/B comparison, trace problem, or measured claim.
+- Keep detailed procedures in the skill; do not duplicate them here.
 
 ## Invariants
 

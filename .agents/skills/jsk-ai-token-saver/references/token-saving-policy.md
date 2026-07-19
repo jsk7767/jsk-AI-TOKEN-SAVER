@@ -12,7 +12,24 @@ correctness → safety → required evidence → task success → token reductio
 
 A shorter output that causes a follow-up question, hides a failure, or forces rework is a regression.
 
-## 2. Measurement scope
+## 2. Active saving behavior
+
+The skill reduces tokens during the task before any benchmark is considered.
+
+Required runtime behavior:
+
+- reuse verified current-task context before calling tools
+- read project pointers and compact indexes before detailed sources
+- search first, then read the smallest useful source slices
+- do not reread unchanged sources or rerun unchanged successful checks
+- batch independent lookups and bound logs/tool output
+- return compact final subagent findings instead of intermediate traces
+- select `clear`, `compact`, or `minimal` reporting by risk and recipient
+- compact long-session state to goal, decisions, paths, verification, blockers, and next action
+
+The detailed cross-agent procedure is in [`token-saving-playbook.md`](token-saving-playbook.md). Measurement is verification for policy changes and claims; it is not the default task workflow.
+
+## 3. Measurement scope
 
 This project measures only text explicitly present in a fixture or captured trace.
 
@@ -32,7 +49,7 @@ Not measured unless separate telemetry is supplied:
 
 Every generated report keeps `billing_claim: false` and, for v2 traces, `hidden_reasoning_measured: false`.
 
-## 3. Report modes
+## 4. Report modes
 
 | Mode | Intended use | Reduction requirement |
 |---|---|---|
@@ -40,7 +57,7 @@ Every generated report keeps `billing_claim: false` and, for v2 traces, `hidden_
 | `compact` | worker handoffs and routine QA | candidate must be shorter and preserve markers |
 | `minimal` | investigation locations and review findings | candidate must be shorter and preserve markers |
 
-## 4. V1 A/B fixture contract
+## 5. V1 A/B fixture contract
 
 A v1 fixture uses `schema_version: 1` and a non-empty `cases` array.
 
@@ -60,7 +77,7 @@ Failure conditions include:
 - a `compact` or `minimal` candidate that is not shorter
 - aggregate safe-mode savings below the configured threshold
 
-## 5. V2 visible-trace contract
+## 6. V2 visible-trace contract
 
 A v2 fixture uses `schema_version: 2` and a non-empty `tasks` array.
 
@@ -74,7 +91,7 @@ Each task defines:
 
 Only successful runs contribute to token distributions. A candidate fails if its success rate regresses or its successful median is not more token-efficient.
 
-## 6. Expected-fail fixtures
+## 7. Expected-fail fixtures
 
 An expected-fail fixture validates that the evaluator rejects an unsafe or inefficient candidate.
 
@@ -83,7 +100,7 @@ An expected-fail fixture validates that the evaluator rejects an unsafe or ineff
 
 CI must distinguish these exits. Any unexpected pass or runtime error fails CI.
 
-## 7. Public-data rules
+## 8. Public-data rules
 
 Public fixtures must use synthetic or anonymized data only.
 
@@ -96,7 +113,7 @@ Do not include:
 
 Use documentation-only IP ranges such as `192.0.2.0/24` for security examples.
 
-## 8. Reproduction commands
+## 9. Reproduction commands
 
 ```bash
 uv sync

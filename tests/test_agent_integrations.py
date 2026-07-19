@@ -18,7 +18,7 @@ class AgentIntegrationTests(unittest.TestCase):
 
         self.assertTrue(skill_text.startswith("---\n"))
         self.assertRegex(skill_text, r"(?m)^name: jsk-ai-token-saver$")
-        self.assertRegex(skill_text, r"(?m)^description: .+$")
+        self.assertRegex(skill_text, r"(?m)^description: Reduce .+$")
         skill_version = re.search(r"(?m)^version: (.+)$", skill_text).group(1)
         project = tomllib.loads(
             (ROOT / "pyproject.toml").read_text(encoding="utf-8")
@@ -29,10 +29,22 @@ class AgentIntegrationTests(unittest.TestCase):
             "scripts/token_visible_benchmark.py",
             "templates/report-ab.example.json",
             "templates/visible-trace.example.json",
+            "templates/compact-handoff.md",
             "references/token-saving-policy.md",
+            "references/token-saving-playbook.md",
         ):
             self.assertTrue((CANONICAL_SKILL / relative_path).is_file(), relative_path)
             self.assertIn(relative_path, skill_text)
+
+        for operating_contract in (
+            "## Token-saving execution loop",
+            "Hot cache → project pointer → context pack/index → targeted search → exact slices",
+            "Do not reread unchanged sources",
+            "Batch independent lookups",
+            "Return final findings, not intermediate reasoning",
+            "Measurement is verification, not the workflow",
+        ):
+            self.assertIn(operating_contract, skill_text)
 
     def test_packaged_evaluators_match_repository_sources(self):
         for filename in ("token_ab_benchmark.py", "token_visible_benchmark.py"):
@@ -44,6 +56,18 @@ class AgentIntegrationTests(unittest.TestCase):
         self.assertEqual(
             (ROOT / "docs" / "token-saving-policy.md").read_bytes(),
             (CANONICAL_SKILL / "references" / "token-saving-policy.md").read_bytes(),
+        )
+        self.assertEqual(
+            (ROOT / "docs" / "token-saving-playbook.md").read_bytes(),
+            (CANONICAL_SKILL / "references" / "token-saving-playbook.md").read_bytes(),
+        )
+        playbook = (ROOT / "docs" / "token-saving-playbook.md").read_text(
+            encoding="utf-8"
+        )
+        self.assertNotIn("(../templates/compact-handoff.md)", playbook)
+        self.assertIn(
+            ".agents/skills/jsk-ai-token-saver/templates/compact-handoff.md",
+            playbook,
         )
 
     def test_project_agent_discovery_files_exist_and_claude_adapter_is_safe(self):
@@ -57,10 +81,12 @@ class AgentIntegrationTests(unittest.TestCase):
         self.assertIn(".claude/skills/jsk-ai-token-saver/SKILL.md", claude)
         self.assertIn(".agents/skills/jsk-ai-token-saver/SKILL.md", claude_skill)
         self.assertIn(
-            "correctness → safety → required evidence → success rate → token reduction",
+            "correctness → safety → required evidence → task success → token reduction",
             claude_skill,
         )
         self.assertIn("scripts/token_ab_benchmark.py", claude_skill)
+        self.assertIn("Do not reread unchanged sources", claude_skill)
+        self.assertIn("Return final findings, not intermediate reasoning", claude_skill)
         self.assertIn("expected-fail exit 1", claude)
 
     def test_readme_documents_all_three_agent_install_paths(self):
@@ -74,10 +100,13 @@ class AgentIntegrationTests(unittest.TestCase):
             "$HOME/.agents/skills/jsk-ai-token-saver",
             "$HOME/.claude/skills/jsk-ai-token-saver",
             f"hermes skills install '{hermes_identifier}'",
-            "자동으로 실제 API 청구 토큰을 줄이는 프록시가 아닙니다",
+            "## 실제 토큰 절약 방식",
+            "측정은 검증 보조",
+            "Hot Cache → Pointer → Search → Slice",
         ):
             self.assertIn(marker, readme)
         self.assertNotIn("raw.githubusercontent.com", readme)
+        self.assertNotIn("visible-token measurement toolkit", readme)
 
         report = json.loads(
             (ROOT / "reports" / "token-ab-baseline.json").read_text(encoding="utf-8")

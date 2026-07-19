@@ -6,9 +6,15 @@
 ## Codex native skill
 
 Codex는 저장소의 `.agents/skills/jsk-ai-token-saver/SKILL.md`를 자동 발견한다.
-토큰 절감, 보고 압축, baseline/candidate 비교, 반복 tool output 또는 context headroom 측정 요청에서는 `$jsk-ai-token-saver`를 명시적으로 호출하거나 해당 skill을 먼저 로드한다.
+저장소·리서치·장기 작업·멀티에이전트·반복 tool/file 작업 또는 토큰 절감 요청에서는 `$jsk-ai-token-saver`를 먼저 로드하고 실제 절약 루프를 적용한다.
 
-전역 설치본에서도 같은 skill 이름과 계약을 사용한다. 저장소 안에서는 CI 재현을 위해 루트 `scripts/`, `benchmarks/`, `reports/` 경로를 우선한다.
+## 실제 절약 규칙
+
+- 현재 검증된 컨텍스트 → 프로젝트 포인터 → 검색 → 필요한 줄 범위 순서로 읽는다.
+- 변경되지 않은 파일·로그·성공한 검사 결과를 이유 없이 반복해서 읽거나 실행하지 않는다.
+- 독립 조회는 일괄 실행하고, 서브에이전트는 중간 과정이 아닌 최종 근거·경로·검증·판정만 반환한다.
+- 측정기는 정책 변경, A/B 비교, 절감률 주장 때만 사용한다. 측정이 기본 작업 흐름이 아니다.
+- 세부 절차의 단일 원본은 `.agents/skills/jsk-ai-token-saver/SKILL.md`다. 이 파일에 장문 절차를 복제하지 않는다.
 
 ## 불변 규칙
 - 정확성, 안전성, required marker, exit code, 성공률을 토큰 절감보다 먼저 판정한다.

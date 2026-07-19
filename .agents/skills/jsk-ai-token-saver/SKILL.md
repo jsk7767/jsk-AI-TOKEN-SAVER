@@ -1,83 +1,112 @@
 ---
 name: jsk-ai-token-saver
-description: Measure agent token savings without losing correctness.
-version: 0.2.0
+description: Reduce agent context, tool, and handoff tokens safely.
+version: 0.3.0
 platforms: [windows, linux, macos]
 metadata:
   hermes:
-    tags: [tokens, benchmark, context, agent-workflows, safety]
+    tags: [token-saving, context, tools, handoffs, agent-workflows, safety]
 ---
 
 # jsk AI TOKEN SAVER
 
+## Mission
+
+Actively reduce visible tokens used to complete the current task. Save tokens by loading less irrelevant context, returning less redundant tool output, avoiding repeated reads, compressing agent handoffs, and preventing retries or rework.
+
+Do not optimize for answer length alone. The target is the smallest sufficient evidence envelope that completes the task correctly.
+
 ## When to use
 
-Load this skill when the user asks to reduce token usage, shorten agent handoffs, compare a baseline with a candidate, audit repeated tool output, or measure visible context headroom.
-
-Do not load it merely to make every user-facing answer short.
+Load for repository work, research, long sessions, multi-agent work, repeated tool/file use, context pressure, or any request to save/reduce tokens. Once loaded, apply the operating loop during the task; do not start by benchmarking.
 
 ## Safety contract
 
-Apply this order without exception:
+```text
+correctness → safety → required evidence → task success → token reduction
+```
+
+- A shorter run that causes a follow-up, hides a failure, or requires rework is a regression.
+- Keep server, security, database, permission, and deployment reports in `clear` mode with every required field.
+- Preserve exact paths, line numbers, commands, exits, error text, rollback state, and PASS/FAIL evidence when they matter.
+- Never treat visible-token counts as provider billing or hidden-reasoning measurements.
+
+## Token-saving execution loop
+
+### 1. Context gate
+
+Use this loading ladder and stop when the task has sufficient evidence:
 
 ```text
-correctness → safety → required evidence → success rate → token reduction
+Hot cache → project pointer → context pack/index → targeted search → exact slices → full source only if required
 ```
 
-- Missing evidence, a changed exit code, a lower success rate, or a longer safe-mode candidate is `FAIL`.
-- Never combine savings percentages from different fixtures or token surfaces.
-- Never describe visible fixture counts as provider billing or hidden-reasoning measurements.
-- Use only synthetic, anonymized, or user-approved fixture data.
-- Server, security, database, permission, and deployment reports stay `clear`; do not compress required fields.
+- Reuse verified facts, paths, and results already in the current task.
+- Read short project pointers (`AGENTS.md`, `CLAUDE.md`) before detailed manuals.
+- Search filenames, symbols, routes, tests, or exact errors before reading files.
+- Read the smallest useful line range and expand only across a missing dependency or control-flow boundary.
+- Do not reread unchanged sources unless the prior range was incomplete or the source changed.
+- Do not scan every file or load every document “just in case.”
 
-## Choose the evaluator
+### 2. Tool gate
 
-### V1 report A/B
+- Batch independent lookups in one parallel request.
+- Use targeted search before reads and offset/limit pagination for large sources.
+- Bound terminal output to changed files, decisive errors, failing tests, or the needed log window.
+- For three or more repetitive calls, use a script/tool loop that reduces results before returning them.
+- Do not repeat an expensive successful check unless code, config, dependencies, or the asserted boundary changed.
+- Stop gathering when the success contract has enough evidence.
 
-Use for a baseline and candidate report, reviewer handoff, or tool output pair.
+### 3. Instruction gate
 
-- Evaluator: [scripts/token_ab_benchmark.py](scripts/token_ab_benchmark.py)
-- Runnable example: [templates/report-ab.example.json](templates/report-ab.example.json)
-- Required evidence: `mode`, baseline, candidate, one or more markers, and both exit codes when exit behavior matters.
+- Keep project instruction files as pointers: invariants, routes, verification commands, and relevant skill names.
+- Keep detailed reusable procedures in one skill/reference and load them only when relevant.
+- Do not copy a long policy into every prompt, worker brief, or context file.
 
-### V2 visible trace
+### 4. Delegation gate
 
-Use for captured system/user/tool/assistant traces with repeated reads, retries, success rates, and context headroom.
+Delegate only when isolation or parallelism saves more context than the delegation prompt and return cost.
 
-- Evaluator: [scripts/token_visible_benchmark.py](scripts/token_visible_benchmark.py)
-- Runnable example: [templates/visible-trace.example.json](templates/visible-trace.example.json)
-- Required evidence: at least three runs per arm by default, correctness markers, declared success, and visible messages.
+- Send one bounded goal, exact known paths/evidence, forbidden actions, PASS criteria, and return format.
+- Return final findings, not intermediate reasoning, raw browsing narratives, or full tool transcripts.
+- Use [templates/compact-handoff.md](templates/compact-handoff.md) for normal handoffs.
+- Main agents verify external side effects from a returned path, URL, ID, status, or command result instead of importing a worker's full context.
 
-Read [references/token-saving-policy.md](references/token-saving-policy.md) when changing schemas, thresholds, or protected report modes.
+Default depth:
 
-## Execution workflow
+| Role | Mode | Return |
+|---|---|---|
+| Investigator | `minimal` | location, symbol, evidence, verdict |
+| Worker | `compact` | changed paths, behavior, verification, risk, verdict |
+| Reviewer | `minimal` | finding, severity, path:line, requested fix |
+| QA | `compact` | commands, observed result, PASS/FAIL |
+| Server/security/deploy | `clear` | every protected operational field |
 
-1. Locate the directory containing this `SKILL.md`; call it `<skill-dir>`.
-2. Copy the closest example from `<skill-dir>/templates/` to a temporary or project-local JSON file.
-3. Replace synthetic text with the baseline, candidate, markers, exits, or trace messages being measured. Do not insert credentials or private production records.
-4. Run the matching evaluator with exact `tiktoken` counting:
+### 5. Response gate
 
-```bash
-uv run --with tiktoken python "<skill-dir>/scripts/token_ab_benchmark.py" <fixture.json> --encoding o200k_base --output <report.json>
-uv run --with tiktoken python "<skill-dir>/scripts/token_visible_benchmark.py" <trace.json> --encoding o200k_base --output <report.json>
-```
+- `clear`: user decisions, incidents, security, DB, permissions, production changes, ambiguous failures.
+- `compact`: routine completion and worker/QA handoffs.
+- `minimal`: code locations, critic findings, lookups, and status where context is already shared.
 
-5. Interpret the process exit exactly:
-   - `0`: contract and token-efficiency gates passed.
-   - `1`: measurement completed but the candidate failed the contract.
-   - `2`: input, dependency, or runtime error; do not call this an expected safety failure.
-6. Read the generated JSON and report the measured scope, token counts, savings, missing markers, failure reasons, and `PASS` or `FAIL`.
+State each fact once. Keep evidence that prevents a follow-up; remove narration that does not change the decision or next action.
 
-When running inside this repository, prefer the root `scripts/`, `benchmarks/`, and `reports/` paths so CI can reproduce the result.
+### 6. Context-pressure gate
 
-## Required final report
+At a verified milestone preserve only goal, decisions, changed paths, test evidence, blockers, and next action. Drop duplicate excerpts, successful intermediate output, and obsolete hypotheses. Use runtime compaction when needed (`/compact` where supported; `/compress` in Hermes), then resume from the compact state and source pointers.
 
-```text
-[상태] measured fixture/trace and scope
-[의미] what passed or why it failed
-[검증] baseline tokens, candidate tokens, savings, markers, exit
-[한계] visible text only; no billing or hidden-reasoning claim
-[결론] PASS / FAIL
-```
+Never compact unresolved exact errors, security evidence, migration/deployment state, rollback data, or pending user decisions.
 
-This skill is a measurement and operating-policy package. It does not intercept model traffic or automatically reduce API billing.
+For detailed operating rules, read [references/token-saving-playbook.md](references/token-saving-playbook.md). For protected modes and evaluator contracts, read [references/token-saving-policy.md](references/token-saving-policy.md).
+
+## Measurement is verification, not the workflow
+
+Do not run token benchmarks on every task. Use measurement only when changing the policy, comparing a baseline/candidate, diagnosing repeated reads/retries/headroom, or claiming a savings percentage.
+
+- V1 report A/B: [scripts/token_ab_benchmark.py](scripts/token_ab_benchmark.py) with [templates/report-ab.example.json](templates/report-ab.example.json)
+- V2 visible trace: [scripts/token_visible_benchmark.py](scripts/token_visible_benchmark.py) with [templates/visible-trace.example.json](templates/visible-trace.example.json)
+
+Exit meaning: `0` PASS, `1` measured contract failure, `2` runtime/input failure.
+
+## Final report
+
+For normal work, report the result in the selected `clear`, `compact`, or `minimal` mode. Mention token counts only when measurement was actually run. Never claim that this skill intercepted model traffic or directly measured provider billing.

@@ -1,9 +1,9 @@
 # jsk AI TOKEN SAVER
 
-> Safety-first visible-token measurement toolkit for AI agent workflows.
+> Active context, tool-output, and handoff token-saving skill for AI agents.
 
-**jsk AI TOKEN SAVER**는 AI 답변을 무조건 짧게 만드는 도구가 아닙니다.
-정확성·필수 근거·성공률을 먼저 검증하고, 그 조건을 통과한 결과에서만 실제 visible token 절감량을 측정합니다.
+**jsk AI TOKEN SAVER**는 토큰을 세기만 하는 도구가 아닙니다.
+Codex·Claude Code·Hermes가 작업할 때 불필요한 문서 로딩, 파일 재조회, 긴 tool output, 서브에이전트 중간 과정, 중복 보고를 실제로 줄이게 만드는 실행 Skill입니다.
 
 ## 궁극적 목적
 
@@ -12,7 +12,7 @@
 단, 정확성·안전성·검증 증거는 그대로 유지
 ```
 
-핵심 지표는 **정확히 완료된 작업 1건당 visible tokens**입니다.
+핵심 지표는 **정확히 완료된 작업 1건당 visible tokens**입니다. 측정은 검증 보조이며, 본체는 에이전트의 작업 방식을 바꾸는 것입니다.
 
 - 짧아졌지만 필수 marker가 사라지면 `FAIL`
 - baseline/candidate 중 한쪽 exit code가 없으면 `FAIL`
@@ -20,11 +20,32 @@
 - 짧은 요청이 오히려 길어지면 `FAIL`
 - provider 청구액이나 hidden reasoning은 측정한 것처럼 주장하지 않음
 
+## 실제 토큰 절약 방식
+
+Skill이 로드되면 에이전트는 다음 순서로 작업합니다.
+
+```text
+Hot Cache → Pointer → Search → Slice → Bounded Tools → Compact Handoff → Verified Answer
+```
+
+| 절약 지점 | 기존 낭비 | 적용 후 |
+|---|---|---|
+| 컨텍스트 | 관련 문서와 대화 전체 로딩 | 현재 검증값 → 프로젝트 포인터 → 검색 결과 → 필요한 줄만 읽기 |
+| 파일 읽기 | 같은 파일·로그 반복 조회 | 읽은 경로·범위를 재사용하고 변경됐을 때만 재조회 |
+| Tool output | 전체 로그·전체 JSON 반환 | 실패 원인, 변경 파일, 필요한 행만 제한 반환 |
+| Tool 호출 | 독립 조회를 한 번씩 순차 실행 | 독립 조회는 한 번에 병렬 처리 |
+| Skill/지침 | 긴 절차를 모든 AGENTS·프롬프트에 복제 | 포인터만 유지하고 필요한 Skill만 로드 |
+| 서브에이전트 | 탐색 과정과 raw transcript까지 메인에 반환 | 최종 근거·경로·검증·위험·판정만 반환 |
+| 보고 | 모든 역할이 같은 긴 보고 | Investigator/Reviewer=`minimal`, Worker/QA=`compact`, 위험 작업=`clear` |
+| 긴 세션 | 성공 로그와 폐기된 가설까지 계속 보존 | 목표·결정·변경 경로·검증·다음 행동만 압축 보존 |
+
+상세 실행 절차는 [`docs/token-saving-playbook.md`](docs/token-saving-playbook.md)에 있습니다. 이 Skill은 에이전트의 visible context와 작업 출력을 적극적으로 줄이지만, 모델 통신을 가로채는 billing proxy는 아니므로 provider의 실제 청구액은 별도 telemetry 없이는 측정하지 않습니다.
+
 ## Codex · Claude Code · Hermes에서 사용
 
-세 에이전트가 사용하는 [Agent Skills](https://agentskills.io/) 형식으로 패키징했습니다. 공통 원본은 `.agents/skills/jsk-ai-token-saver/`이며, 두 evaluator·실행 예제·정책 문서가 함께 들어 있습니다.
+세 에이전트가 사용하는 [Agent Skills](https://agentskills.io/) 형식으로 패키징했습니다. 공통 원본은 `.agents/skills/jsk-ai-token-saver/`이며, 실행 플레이북·compact handoff 템플릿·정책·검증 evaluator가 함께 들어 있습니다.
 
-> 이 프로젝트는 에이전트가 안전한 압축 규칙을 따르고 visible trace를 측정하게 만드는 skill입니다. **자동으로 실제 API 청구 토큰을 줄이는 프록시가 아닙니다.** 모델 통신을 가로채거나 provider billing·hidden reasoning을 측정하지 않습니다.
+> 설치 후 Skill을 로드하면 실제 작업 중 선택적 읽기·도구 출력 제한·최종 handoff 압축 규칙이 적용됩니다. evaluator는 절감 정책을 변경하거나 절감률을 주장할 때만 사용합니다.
 
 ### 저장소에서 바로 사용
 
@@ -50,7 +71,7 @@ cp -R ".agents/skills/jsk-ai-token-saver" "$HOME/.agents/skills/jsk-ai-token-sav
 test -f "$HOME/.agents/skills/jsk-ai-token-saver/SKILL.md"
 ```
 
-Codex를 다시 시작한 뒤 `$jsk-ai-token-saver`로 명시 호출하거나 토큰 측정을 자연어로 요청합니다.
+Codex를 다시 시작한 뒤 `$jsk-ai-token-saver`로 명시 호출하거나 “이 작업을 토큰 절약 모드로 진행해”라고 요청합니다.
 
 ### Claude Code 전역 설치
 
@@ -88,12 +109,15 @@ hermes -s jsk-ai-token-saver
 ### 에이전트에게 요청하는 예시
 
 ```text
-이 작업의 baseline과 candidate를 jsk-ai-token-saver로 비교해줘.
-필수 근거와 exit code를 유지하면서 worker handoff 토큰을 줄이고 PASS/FAIL을 보여줘.
-이 tool trace의 반복 읽기·retry·context headroom을 측정해줘.
+이 저장소 작업을 jsk-ai-token-saver 모드로 진행해. 검색 후 필요한 줄만 읽고 같은 파일은 반복 조회하지 마.
+서브에이전트는 중간 과정을 가져오지 말고 경로·근거·검증·판정만 compact로 반환해.
+긴 로그와 전체 JSON은 넣지 말고 실패 원인과 필요한 행만 가져와.
+마지막에 실제 적용한 절약 규칙과 PASS/FAIL만 보고해.
 ```
 
-## 포함된 프로그램
+## 측정은 검증 보조
+
+일반 작업에서는 아래 프로그램을 실행하지 않습니다. 절약 정책을 바꾸거나 baseline/candidate를 비교하거나 수치로 절감률을 주장할 때만 사용합니다.
 
 ### 1. `token_ab_benchmark.py`
 
@@ -184,11 +208,11 @@ jsk-AI-TOKEN-SAVER/
 ├── tests/         # marker·exit·성공률·빈 계약 회귀 테스트
 ├── benchmarks/    # 합성·익명화 fixture
 ├── reports/       # 재현 가능한 fixture 결과
-├── docs/          # 토큰 절약 운영 정책
+├── docs/          # 실제 절약 플레이북 + 측정·안전 정책
 └── .github/       # 공개 CI
 ```
 
-## 측정 범위
+## 검증 측정 범위
 
 이 저장소가 측정하는 것:
 
@@ -205,7 +229,7 @@ jsk-AI-TOKEN-SAVER/
 
 ## 운영 원칙
 
-자세한 기준은 [`docs/token-saving-policy.md`](docs/token-saving-policy.md)를 참고하세요.
+실제 작업 절차는 [`docs/token-saving-playbook.md`](docs/token-saving-playbook.md), 측정·안전 기준은 [`docs/token-saving-policy.md`](docs/token-saving-policy.md)를 참고하세요.
 
 판정 순서는 항상 다음과 같습니다.
 
