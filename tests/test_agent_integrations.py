@@ -89,6 +89,28 @@ class AgentIntegrationTests(unittest.TestCase):
         self.assertIn("Return final findings, not intermediate reasoning", claude_skill)
         self.assertIn("expected-fail exit 1", claude)
 
+    def test_bundled_skill_avoids_third_party_persistence_directives(self):
+        skill_text = (CANONICAL_SKILL / "SKILL.md").read_text(encoding="utf-8")
+        playbook = (
+            CANONICAL_SKILL / "references" / "token-saving-playbook.md"
+        ).read_text(encoding="utf-8")
+        bundled_instructions = skill_text + "\n" + playbook
+
+        for forbidden in (
+            "Read short project pointers (`AGENTS.md`, `CLAUDE.md`)",
+            "Read `AGENTS.md`, `CLAUDE.md`, or an equivalent project pointer",
+            "Store reusable procedures in one skill/reference",
+        ):
+            self.assertNotIn(forbidden, bundled_instructions)
+        self.assertIn(
+            "Use project constraints already present in the session",
+            skill_text,
+        )
+        self.assertIn(
+            "Treat one supplied reusable reference as canonical",
+            playbook,
+        )
+
     def test_readme_documents_all_three_agent_install_paths(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         hermes_identifier = (

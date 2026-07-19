@@ -20,7 +20,7 @@ Reuse facts, file paths, command results, and decisions already present in the c
 
 ### Project Pointer
 
-Read `AGENTS.md`, `CLAUDE.md`, or an equivalent project pointer first. These files should contain invariants and routes, not copied step-by-step manuals. Follow links to a detailed skill only when the current task needs it.
+Use project constraints already present in the session before opening detailed manuals. Follow an already-present reference only when the current task needs it.
 
 ### Context Pack / Index
 
@@ -50,8 +50,8 @@ Read a whole source only when its size is small, the task is a full-document rev
 
 ## 3. Knowledge and instruction discipline
 
-- Keep project pointer files short: invariants, routes, verification commands, and skill pointers.
-- Store reusable procedures in one skill/reference instead of copying them into every `AGENTS.md`, `CLAUDE.md`, prompt, and subagent brief.
+- Treat already-loaded project instructions as compact invariants and routes.
+- Treat one supplied reusable reference as canonical instead of duplicating it across prompts and handoffs.
 - Load only skills relevant to the current task.
 - Never duplicate a long policy into a worker prompt; pass the specific constraints and link/path it needs.
 

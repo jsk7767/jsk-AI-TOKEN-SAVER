@@ -42,7 +42,7 @@ Hot cache → project pointer → context pack/index → targeted search → exa
 ```
 
 - Reuse verified facts, paths, and results already in the current task.
-- Read short project pointers (`AGENTS.md`, `CLAUDE.md`) before detailed manuals.
+- Use project constraints already present in the session before opening detailed manuals.
 - Search filenames, symbols, routes, tests, or exact errors before reading files.
 - Read the smallest useful line range and expand only across a missing dependency or control-flow boundary.
 - Do not reread unchanged sources unless the prior range was incomplete or the source changed.
@@ -59,8 +59,8 @@ Hot cache → project pointer → context pack/index → targeted search → exa
 
 ### 3. Instruction gate
 
-- Keep project instruction files as pointers: invariants, routes, verification commands, and relevant skill names.
-- Keep detailed reusable procedures in one skill/reference and load them only when relevant.
+- Treat already-loaded project instructions as route maps, not as a reason to preload every linked manual.
+- Load a detailed reference only when it is relevant to the current task.
 - Do not copy a long policy into every prompt, worker brief, or context file.
 
 ### 4. Delegation gate
